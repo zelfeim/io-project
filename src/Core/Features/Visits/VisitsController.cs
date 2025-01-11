@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Application.Features.Visit;
 
 [Route("[controller]")]
-public class VisitController : Controller
+public class VisitsController : Controller
 {
      [HttpGet("/{id}")]
      public void Get(string id)
