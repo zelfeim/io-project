@@ -8,6 +8,6 @@ public class Employee : IEntity, IAggregateRoot
     public string Surname { get; }
     public string Role { get; }
     public Address Address { get; }
-    public WorkSchedule? WorkSchedule { get; private set; }
+    public List<WorkSchedule> WorkSchedule { get; private set; }
     public int Id { get; }
 }
