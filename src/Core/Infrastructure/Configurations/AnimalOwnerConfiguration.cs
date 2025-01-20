@@ -18,11 +18,9 @@ public class AnimalOwnerConfiguration : IEntityTypeConfiguration<AnimalOwner>
             .IsRequired()
             .HasMaxLength(150);
 
-        builder.Property(ao => ao.Email)
-            .IsRequired();
-
-        builder.Property(ao => ao.Address)
-            .IsRequired();
+        builder.OwnsOne(ao => ao.Email);
+        
+        builder.OwnsOne(ao => ao.Address);
 
         builder.Property(ao => ao.Telephone)
             .IsRequired();

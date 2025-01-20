@@ -11,11 +11,12 @@ public class AnimalOwner : IEntity
     public string Surname;
     public string Telephone;
 
-    public AnimalOwner(int id, List<int>? animalIds, string name, string surname, string email, Address address,
-        string telephone)
+    private AnimalOwner()
     {
-        Id = id;
-        AnimalIds = animalIds;
+    }
+
+    public AnimalOwner(string name, string surname, string email, Address address, string telephone)
+    {
         Name = name;
         Surname = surname;
         Email = new EmailAddress(email);

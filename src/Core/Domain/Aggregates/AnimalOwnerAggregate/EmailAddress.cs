@@ -2,10 +2,10 @@ namespace Application.Domain.Aggregates.AnimalOwnerAggregate;
 
 public class EmailAddress : IValueObject
 {
-    public EmailAddress(string emailAddress)
+    public EmailAddress(string email)
     {
         // TODO: Add validation
-        Email = emailAddress;
+        Email = email;
     }
 
     public string Email { get; private set; }

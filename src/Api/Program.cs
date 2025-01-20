@@ -1,4 +1,5 @@
 ﻿using Application.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder();
 
@@ -10,6 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddDbContext<ApplicationDbContext>(o =>
 {
+    o.UseMySQL();
 });
 
 var app = builder.Build();

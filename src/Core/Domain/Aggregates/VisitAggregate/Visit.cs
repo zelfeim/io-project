@@ -16,6 +16,8 @@ public class Visit : IAggregateRoot
     public uint VisitLength;
     public VisitStatus VisitStatus;
     public VisitType VisitType;
+    
+    private Visit() {}
 
     public Visit(int animalId, int employeeId, DateTime date, VisitType visitType, uint visitLength,
         string? visitInformation = null)

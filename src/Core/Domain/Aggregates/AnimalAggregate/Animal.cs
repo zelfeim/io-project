@@ -9,8 +9,10 @@ public class Animal : IEntity, IAggregateRoot
     public string Name;
     public string Race;
     public string Species;
+    
+    private Animal() {}
 
-    public Animal(int id, AnimalOwner animalOwner, string name, string species, string race, int age)
+    public Animal(int id, string name, string species, string race, int age)
     {
         Id = id;
         Age = age;
