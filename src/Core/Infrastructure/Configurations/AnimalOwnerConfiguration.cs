@@ -20,7 +20,8 @@ public class AnimalOwnerConfiguration : IEntityTypeConfiguration<AnimalOwner>
 
         builder.OwnsOne(ao => ao.Email);
         
-        builder.OwnsOne(ao => ao.Address);
+        builder.Property(ao => ao.Address)
+            .IsRequired();
 
         builder.Property(ao => ao.Telephone)
             .IsRequired();

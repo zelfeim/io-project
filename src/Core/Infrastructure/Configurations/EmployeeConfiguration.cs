@@ -21,7 +21,8 @@ public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
         builder.Property(e => e.Role)
             .IsRequired();
 
-        builder.OwnsOne(e => e.Address);
+        builder.Property(e => e.Address)
+            .IsRequired();
 
         builder.HasMany(e => e.WorkSchedule)
             .WithOne()

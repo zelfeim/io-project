@@ -11,8 +11,8 @@ public class Visit : IAggregateRoot
     public int EmployeeId;
     public int Id;
     public Prescription? Prescription;
-    public string? SuggestedTreatment;
-    public string? VisitInformation;
+    public string SuggestedTreatment;
+    public string VisitInformation;
     public uint VisitLength;
     public VisitStatus VisitStatus;
     public VisitType VisitType;
@@ -20,7 +20,7 @@ public class Visit : IAggregateRoot
     private Visit() {}
 
     public Visit(int animalId, int employeeId, DateTime date, VisitType visitType, uint visitLength,
-        string? visitInformation = null)
+        string visitInformation = "")
     {
         AnimalId = animalId;
         EmployeeId = employeeId;
@@ -32,7 +32,7 @@ public class Visit : IAggregateRoot
     }
 
     public Visit(int animalId, int employeeId, DateTime date, VisitType visitType, int visitLength,
-        string? visitInformation = null)
+        string visitInformation = "")
     {
         if (visitLength < 0) throw new ArgumentException("Visit length must be greater than zero", nameof(visitLength));
 
