@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Application.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250122231135_Initial")]
+    [Migration("20250123174023_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -131,14 +131,17 @@ namespace Application.Infrastructure.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("date");
 
                     b.Property<int>("EmployeeId")
                         .HasColumnType("integer");
 
-                    b.Property<long>("ShiftDuration")
-                        .HasColumnType("bigint");
+                    b.Property<TimeOnly>("ShiftEnd")
+                        .HasColumnType("time without time zone");
+
+                    b.Property<TimeOnly>("ShiftStart")
+                        .HasColumnType("time without time zone");
 
                     b.HasKey("Id");
 

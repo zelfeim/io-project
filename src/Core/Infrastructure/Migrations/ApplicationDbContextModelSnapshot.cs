@@ -128,14 +128,17 @@ namespace Application.Infrastructure.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("date");
 
                     b.Property<int>("EmployeeId")
                         .HasColumnType("integer");
 
-                    b.Property<long>("ShiftDuration")
-                        .HasColumnType("bigint");
+                    b.Property<TimeOnly>("ShiftEnd")
+                        .HasColumnType("time without time zone");
+
+                    b.Property<TimeOnly>("ShiftStart")
+                        .HasColumnType("time without time zone");
 
                     b.HasKey("Id");
 
