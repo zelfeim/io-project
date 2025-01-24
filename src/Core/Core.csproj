@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <ItemGroup>
-        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+        <FrameworkReference Include="Microsoft.AspNetCore.App"/>
     </ItemGroup>
 
     <PropertyGroup>
@@ -12,21 +12,18 @@
 
     <ItemGroup>
         <Folder Include="Domain\Aggregates\"/>
-        <Folder Include="Extensions\" />
-        <Folder Include="Features\Visits\CancelVisit\"/>
-        <Folder Include="Features\Visits\GetVisit\"/>
-        <Folder Include="Features\Visits\RescheduleVisit\"/>
-        <Folder Include="Infrastructure\Migrations\" />
+        <Folder Include="Extensions\"/>
+        <Folder Include="Infrastructure\Migrations\"/>
     </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="FluentValidation" Version="11.11.0"/>
         <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.12"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.12" />
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.1" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.12"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.1"/>
         <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7"/>
-        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.11" />
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.11"/>
     </ItemGroup>
 
 </Project>

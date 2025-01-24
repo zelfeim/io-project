@@ -4,5 +4,5 @@ public enum VisitStatus
 {
     Planned,
     Completed,
-    Canceled
+    Cancelled
 }
