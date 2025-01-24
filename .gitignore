@@ -1,1 +1,7 @@
+.idea
+.vscode
+
 **/obj
+
+node_modules
+dist
