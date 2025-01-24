@@ -1,22 +1,31 @@
-import { createRouter, createWebHistory, type Router } from 'vue-router';
-import HomeView from '@/views/HomeView.vue';
-import RoutePath from '@/enums/RoutePath.ts';
-import registerGuards from '@/router/register-guards.ts';
+import { createRouter, createWebHistory, type Router } from 'vue-router'
+import HomeView from '@/views/home/HomeView.vue'
+import RoutePath from '@/enums/route-path.ts'
+import registerGuards from '@/router/register-guards.ts'
+import LoginView from '@/views/login/LoginView.vue'
 
 const router: Router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
         {
+            path: RoutePath.LOGIN,
+            name: 'login',
+            component: LoginView,
+            meta: {
+                public: true,
+            },
+        },
+        {
             path: RoutePath.HOME,
             name: 'home',
             component: HomeView,
             meta: {
-                requireAuth: true,
+                public: false,
             },
         },
     ],
-});
+})
 
-registerGuards(router);
+registerGuards(router)
 
-export default router;
+export default router
