@@ -1,4 +1,4 @@
-import {type RouteLocationNormalized, type Router} from "vue-router";
+import { type RouteLocationNormalized, type Router } from 'vue-router';
 
 const registerGuards = (router: Router): void => {
     router.beforeEach((to: RouteLocationNormalized): boolean => {
@@ -9,6 +9,6 @@ const registerGuards = (router: Router): void => {
 
         return true;
     });
-}
+};
 
 export default registerGuards;

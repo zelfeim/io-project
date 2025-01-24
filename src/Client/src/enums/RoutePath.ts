@@ -1,5 +1,5 @@
 enum RoutePath {
-    HOME = '/'
+    HOME = '/',
 }
 
 export default RoutePath;
