@@ -41,7 +41,7 @@ public class IntegrationTestWebApplicationFactory : WebApplicationFactory<Progra
         return _dbContainer.StopAsync();
     }
 
-    public Task DisposeAsync()
+    public new Task DisposeAsync()
     {
         return _dbContainer.StopAsync();
     }
