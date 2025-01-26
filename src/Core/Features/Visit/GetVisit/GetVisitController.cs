@@ -18,7 +18,12 @@ public class GetVisitController : ControllerBase
     [HttpGet("{id:int}")]
     public async Task<ActionResult<Domain.Aggregates.VisitAggregate.Visit>> Handle(int id)
     {
-        var visit = await _dbContext.Visits.SingleAsync(v => v.Id == id);
+        var visit = await _dbContext.Visits.SingleOrDefaultAsync(v => v.Id == id);
+
+        if (visit == null)
+        {
+            return NotFound();
+        }
 
         return visit;
     }

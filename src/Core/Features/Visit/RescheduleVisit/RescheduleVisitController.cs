@@ -16,7 +16,12 @@ public class RescheduleVisitController : ControllerBase
     [HttpPut("visit/{id:int}/reschedule")]
     public async Task<ActionResult> Handle(int id, [FromBody] RescheduleVisitRequest request)
     {
-        var visit = await _dbContext.Visits.SingleAsync(v => v.Id == id);
+        var visit = await _dbContext.Visits.SingleOrDefaultAsync(v => v.Id == id);
+
+        if (visit == null)
+        {
+            return NotFound();
+        }
 
         visit.RescheduleVisit(request.Date, request.VisitLength);
         await _dbContext.SaveChangesAsync();

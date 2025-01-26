@@ -16,7 +16,13 @@ public class CancelVisitController : ControllerBase
     [HttpPut("visit/{id:int}/cancel")]
     public async Task<ActionResult> Handle(int id)
     {
-        var visit = await _dbContext.Visits.SingleAsync(v => v.Id == id);
+        var visit = await _dbContext.Visits.SingleOrDefaultAsync(v => v.Id == id);
+
+        if (visit == null)
+        {  
+            return NotFound();
+        }
+        
         visit.SetCancelledStatus();
         await _dbContext.SaveChangesAsync();
 

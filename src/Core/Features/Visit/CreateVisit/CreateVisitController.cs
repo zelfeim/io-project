@@ -24,6 +24,7 @@ public class CreateVisitController : ControllerBase
         _dbContext.Visits.Add(visit);
         await _dbContext.SaveChangesAsync();
 
+        Created();
         return visit.Id;
     }
 }

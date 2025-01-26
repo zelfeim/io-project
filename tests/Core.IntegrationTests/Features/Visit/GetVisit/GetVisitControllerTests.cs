@@ -31,4 +31,17 @@ public class GetVisitControllerTests : BaseIntegrationTest
         var content = await response.Content.ReadAsStringAsync();
         content.Should().NotBeNull();
     }
+
+    [Fact]
+    public async Task GetVisit_ShouldReturnNotFound()
+    {
+        // Arrange
+        const int id = 10;
+        
+        // Act
+        var response = await Client.GetAsync($"api/visit/{id}");
+
+        // Assert
+        response.StatusCode.Should().Be(HttpStatusCode.NotFound);
+    }
 }
