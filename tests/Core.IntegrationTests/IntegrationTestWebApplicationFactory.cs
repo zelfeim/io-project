@@ -1,7 +1,9 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Infrastructure.Persistence;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
@@ -27,7 +29,7 @@ public class IntegrationTestWebApplicationFactory : WebApplicationFactory<Progra
                 services.SingleOrDefault(s => s.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
             
             services.Remove(descriptor);
-
+            
             services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseNpgsql(_dbContainer.GetConnectionString());
@@ -38,7 +40,7 @@ public class IntegrationTestWebApplicationFactory : WebApplicationFactory<Progra
 
     public Task InitializeAsync()
     {
-        return _dbContainer.StopAsync();
+        return _dbContainer.StartAsync();
     }
 
     public new Task DisposeAsync()

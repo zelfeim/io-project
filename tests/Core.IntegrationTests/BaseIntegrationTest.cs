@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Core.Tests;
 
-public class BaseIntegrationTest : IClassFixture<IntegrationTestWebApplicationFactory>, IDisposable
+public abstract class BaseIntegrationTest : IClassFixture<IntegrationTestWebApplicationFactory>, IDisposable
 {
     private readonly IServiceScope _scope;
     
@@ -25,6 +25,9 @@ public class BaseIntegrationTest : IClassFixture<IntegrationTestWebApplicationFa
     public void Dispose()
     {
         _scope.Dispose(); 
+        Client.Dispose();
         DbContext.Dispose();
+        
+        GC.SuppressFinalize(this);
     }
 }

@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Application.Features.Visit.CreateVisit;
 
+[ApiController]
+[Route("api/visit")]
 public class CreateVisitController : ControllerBase
 {
     private readonly ApplicationDbContext _dbContext;
@@ -12,7 +14,7 @@ public class CreateVisitController : ControllerBase
         _dbContext = dbContext;
     }
 
-    [HttpPost("visit")]
+    [HttpPost]
     public async Task<ActionResult<int>> Handle([FromBody] VisitRequest request)
     {
         var visit = new Domain.Aggregates.VisitAggregate.Visit(

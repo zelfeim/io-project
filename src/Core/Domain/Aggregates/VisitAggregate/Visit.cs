@@ -46,7 +46,7 @@ public class Visit : IAggregateRoot
 
     private void SetVisitLength(int visitLength)
     {
-        if (visitLength < 0) throw new ArgumentException("Visit length must be greater than zero", nameof(visitLength));
+        if (visitLength <= 0) throw new ArgumentException("Visit length must be greater than zero", nameof(visitLength));
 
         VisitLength = (uint)visitLength;
     }

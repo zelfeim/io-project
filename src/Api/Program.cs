@@ -1,8 +1,7 @@
-﻿using System.Configuration;
-using Application.Infrastructure.Persistence;
+﻿using Application.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
-var builder = WebApplication.CreateBuilder();
+var builder = WebApplication.CreateBuilder(args);
 
 builder.Logging.AddConsole();
 builder.Logging.AddDebug();
@@ -22,3 +21,4 @@ app.UseRouting();
 app.MapControllers();
 app.Run();
 
+public partial class Program { }

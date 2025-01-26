@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Visit.GetVisit;
 
+[ApiController]
+[Route("api/visit")]
 public class GetVisitController : ControllerBase
 {
     private readonly ApplicationDbContext _dbContext;
@@ -13,7 +15,7 @@ public class GetVisitController : ControllerBase
         _dbContext = dbContext;
     }
 
-    [HttpGet("visit/{id:int}")]
+    [HttpGet("{id:int}")]
     public async Task<ActionResult<Domain.Aggregates.VisitAggregate.Visit>> Handle(int id)
     {
         var visit = await _dbContext.Visits.SingleAsync(v => v.Id == id);
