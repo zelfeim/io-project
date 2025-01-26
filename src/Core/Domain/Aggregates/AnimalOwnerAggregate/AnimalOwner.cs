@@ -28,4 +28,11 @@ public class AnimalOwner : IEntity
     public IReadOnlyCollection<Animal> Animals { get; private set; }
 
     public int Id { get; }
+
+    public void Update(string? address, string? email, string? telephone)
+    {
+        Address = string.IsNullOrEmpty(address) ? Address : address;
+        Email = string.IsNullOrEmpty(email) ? Email : new EmailAddress(email);
+        Telephone = string.IsNullOrEmpty(telephone) ? Telephone : telephone;
+    }
 }
