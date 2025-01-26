@@ -13,6 +13,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(o =>
 {
     o.UseNpgsql(builder.Configuration.GetConnectionString("ApplicationDbContext"));
 });
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 var app = builder.Build();
 

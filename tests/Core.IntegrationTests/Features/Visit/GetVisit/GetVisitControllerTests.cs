@@ -1,9 +1,16 @@
 using System;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using Application.Domain.Aggregates.AnimalAggregate;
+using Application.Domain.Aggregates.AnimalOwnerAggregate;
+using Application.Domain.Aggregates.EmployeeAggregate;
 using Application.Domain.Aggregates.VisitAggregate.Enums;
+using Application.Features.Visit.GetVisit;
 using FluentAssertions;
+using Newtonsoft.Json;
 using Xunit;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace Core.Tests.Features.Visit.GetVisit;
 
@@ -11,8 +18,14 @@ public class GetVisitControllerTests : BaseIntegrationTest
 {
     public GetVisitControllerTests(IntegrationTestWebApplicationFactory webApplicationFactory) : base(webApplicationFactory)
     {
-        DbContext.Visits.Add(new Application.Domain.Aggregates.VisitAggregate.Visit(0, 0, DateTime.Parse("2500-01-01"),
+        DbContext.AnimalOwners.Add(new AnimalOwner("Animal", "Owner", "email@email.com", "Olsztyn", "123456789"));
+        DbContext.Animals.Add(new Animal(1, "Animal", "Species", "Race", 15));
+
+        DbContext.Employees.Add(new Employee("EmployeeName", "EmployeeSurname", "Doctor", "EmployeeAddress"));
+        
+        DbContext.Visits.Add(new Application.Domain.Aggregates.VisitAggregate.Visit(1, 1, DateTime.Parse("2500-01-01"),
             VisitType.Examination, 30));
+        DbContext.SaveChanges();
     }
 
     [Fact]
@@ -30,6 +43,13 @@ public class GetVisitControllerTests : BaseIntegrationTest
 
         var content = await response.Content.ReadAsStringAsync();
         content.Should().NotBeNull();
+        
+        var visit = JsonSerializer.Deserialize<GetVisitResponse>(content);
+        visit.VisitStatus.Should().Be(VisitStatus.Planned);
+        // visit.Date.Should().Be(DateTime.Parse("2500-01-01")); TO FIX
+        visit.VisitInformation.Should().Be("");
+        visit.SuggestedTreatment.Should().BeNull();
+        visit.Prescription.Should().BeNull();
     }
 
     [Fact]

@@ -1,6 +1,7 @@
 using System;
 using System.Net.Http;
 using Application.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using NuGet.Protocol.Plugins;
 using Xunit;
@@ -20,6 +21,8 @@ public abstract class BaseIntegrationTest : IClassFixture<IntegrationTestWebAppl
         
         Client = webApplicationFactory.CreateClient();
         DbContext = _scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+        DbContext.Database.Migrate();
     }
     
     public void Dispose()

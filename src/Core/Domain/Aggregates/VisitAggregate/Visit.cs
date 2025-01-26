@@ -27,7 +27,7 @@ public class Visit : IAggregateRoot
     public int EmployeeId { get; private set; }
     public int Id { get; private set; }
     public Prescription? Prescription { get; private set; }
-    public string SuggestedTreatment { get; private set; }
+    public string? SuggestedTreatment { get; private set; }
     public string VisitInformation { get; private set; }
     public uint VisitLength { get; private set; }
     public VisitStatus VisitStatus { get; private set; }
