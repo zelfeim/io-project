@@ -1,6 +1,7 @@
 using Application.Domain.Aggregates.AnimalAggregate;
 using Application.Domain.Aggregates.EmployeeAggregate;
 using Application.Domain.Aggregates.VisitAggregate.Enums;
+using Application.Features.Visit.EndVisit;
 
 namespace Application.Domain.Aggregates.VisitAggregate;
 
@@ -25,7 +26,7 @@ public class Visit : IAggregateRoot
     public int AnimalId { get; private set; }
     public DateTime Date { get; private set; }
     public int EmployeeId { get; private set; }
-    public int Id { get; private set; }
+    public int Id { get; init; }
     public Prescription? Prescription { get; private set; }
     public string? SuggestedTreatment { get; private set; }
     public string VisitInformation { get; private set; }
@@ -75,5 +76,15 @@ public class Visit : IAggregateRoot
 
         SetDate(newDate);
         SetVisitLength(newVisitLength);
+    }
+
+    public void EndVisit(string suggestedTreatment, string prescribedMeds)
+    {
+        if (VisitStatus != VisitStatus.Planned) throw new ArgumentException("Visit status must be Planned.");
+        
+        SuggestedTreatment = suggestedTreatment;
+        Prescription = new Prescription(prescribedMeds);
+        
+        SetCompletedStatus();
     }
 }
