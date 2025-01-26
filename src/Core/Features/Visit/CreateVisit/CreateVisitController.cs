@@ -15,7 +15,7 @@ public class CreateVisitController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<int>> Handle([FromBody] VisitRequest request)
+    public async Task<ActionResult<int>> Handle([FromBody]CreateVisitRequest request)
     {
         var visit = new Domain.Aggregates.VisitAggregate.Visit(
             request.AnimalId, request.EmployeeId, request.Date, request.Type, request.VisitLength,
