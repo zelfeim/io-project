@@ -1,7 +1,7 @@
 namespace Application.Features.Visit.RescheduleVisit;
 
-public class RescheduleVisitRequest
+public record RescheduleVisitRequest
 {
-    public DateTime Date;
-    public int VisitLength;
+    public DateTime Date { get; set; }
+    public int VisitLength { get; set; }
 }
