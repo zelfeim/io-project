@@ -9,12 +9,14 @@ public class Animal : IEntity, IAggregateRoot
     public string Name;
     public string Race;
     public string Species;
-    
-    private Animal() {}
 
-    public Animal(int id, string name, string species, string race, int age)
+    private Animal()
     {
-        Id = id;
+    }
+
+    public Animal(int animalOwnerId, string name, string species, string race, int age)
+    {
+        AnimalOwnerId = animalOwnerId;
         Age = age;
         Name = name;
         Race = race;

@@ -1,22 +1,21 @@
 using System;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Application.Domain.Aggregates.AnimalAggregate;
-using Application.Domain.Aggregates.AnimalOwnerAggregate;
 using Application.Domain.Aggregates.EmployeeAggregate;
 using Application.Domain.Aggregates.VisitAggregate.Enums;
 using Application.Features.Visit.GetVisit;
+using Core.Tests;
 using FluentAssertions;
-using Newtonsoft.Json;
 using Xunit;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
-namespace Core.Tests.Features.Visit.GetVisit;
+namespace Core.IntegrationTests.Features.Visit;
 
 public class GetVisitControllerTests : BaseIntegrationTest
 {
-    public GetVisitControllerTests(IntegrationTestWebApplicationFactory webApplicationFactory) : base(webApplicationFactory)
+    public GetVisitControllerTests(IntegrationTestWebApplicationFactory webApplicationFactory) : base(
+        webApplicationFactory)
     {
         DbContext.AnimalOwners.Add(
             new Application.Domain.Aggregates.AnimalOwnerAggregate.AnimalOwner("Animal", "Owner", "email@email.com",
@@ -36,10 +35,10 @@ public class GetVisitControllerTests : BaseIntegrationTest
     {
         // Arrange
         const int id = 1;
-        
+
         // Act
         var response = await Client.GetAsync($"api/visit/{id}");
-        
+
         // Assert
         response.Should().NotBeNull();
         response.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -54,7 +53,6 @@ public class GetVisitControllerTests : BaseIntegrationTest
         visit.VisitLength.Should().Be(30);
         visit.VisitType.Should().Be(VisitType.Examination);
         visit.VisitStatus.Should().Be(VisitStatus.Planned);
-        // visit.Date.Should().Be(DateTime.Parse("2500-01-01")); TO FIX
         visit.VisitInformation.Should().Be("");
         visit.SuggestedTreatment.Should().BeNull();
         visit.Prescription.Should().BeNull();
@@ -65,7 +63,7 @@ public class GetVisitControllerTests : BaseIntegrationTest
     {
         // Arrange
         const int id = 10;
-        
+
         // Act
         var response = await Client.GetAsync($"api/visit/{id}");
 

@@ -1,9 +1,10 @@
 using System.Net;
 using System.Threading.Tasks;
+using Core.Tests;
 using FluentAssertions;
 using Xunit;
 
-namespace Core.Tests.Features.AnimalOwner;
+namespace Core.IntegrationTests.Features.AnimalOwner;
 
 public class DeleteAnimalOwnerControllerTests : BaseIntegrationTest
 {

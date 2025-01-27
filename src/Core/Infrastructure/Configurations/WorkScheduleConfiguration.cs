@@ -9,7 +9,7 @@ public class WorkScheduleConfiguration : IEntityTypeConfiguration<WorkSchedule>
     public void Configure(EntityTypeBuilder<WorkSchedule> builder)
     {
         builder.HasKey(ws => ws.Id);
-        
+
         builder.Property(ws => ws.Date)
             .IsRequired();
 

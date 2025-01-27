@@ -1,7 +1,6 @@
 using Application.Domain.Aggregates.AnimalAggregate;
 using Application.Domain.Aggregates.EmployeeAggregate;
 using Application.Domain.Aggregates.VisitAggregate.Enums;
-using Application.Features.Visit.EndVisit;
 
 namespace Application.Domain.Aggregates.VisitAggregate;
 
@@ -47,7 +46,8 @@ public class Visit : IAggregateRoot
 
     private void SetVisitLength(int visitLength)
     {
-        if (visitLength <= 0) throw new ArgumentException("Visit length must be greater than zero", nameof(visitLength));
+        if (visitLength <= 0)
+            throw new ArgumentException("Visit length must be greater than zero", nameof(visitLength));
 
         VisitLength = (uint)visitLength;
     }
@@ -81,10 +81,10 @@ public class Visit : IAggregateRoot
     public void EndVisit(string suggestedTreatment, string prescribedMeds)
     {
         if (VisitStatus != VisitStatus.Planned) throw new ArgumentException("Visit status must be Planned.");
-        
+
         SuggestedTreatment = suggestedTreatment;
         Prescription = new Prescription(prescribedMeds);
-        
+
         SetCompletedStatus();
     }
 }
