@@ -18,10 +18,7 @@ public class RescheduleVisitController : ControllerBase
     {
         var visit = await _dbContext.Visits.SingleOrDefaultAsync(v => v.Id == id);
 
-        if (visit == null)
-        {
-            return NotFound();
-        }
+        if (visit == null) return NotFound();
 
         visit.RescheduleVisit(request.Date, request.VisitLength);
         await _dbContext.SaveChangesAsync();

@@ -12,7 +12,7 @@ public static class GetAnimalOwnerMapper
             Surname = animalOwner.Surname,
             Email = animalOwner.Email,
             Address = animalOwner.Address,
-            Telephone = animalOwner.Telephone,
+            Telephone = animalOwner.Telephone
         };
     }
 }

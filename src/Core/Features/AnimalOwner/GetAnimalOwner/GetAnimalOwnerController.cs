@@ -19,9 +19,9 @@ public class GetAnimalOwnerController : ControllerBase
     public async Task<ActionResult<GetAnimalOwnerResponse>> Handle(int id)
     {
         var animalOwner = await _dbContext.AnimalOwners.SingleOrDefaultAsync(o => o.Id == id);
-        
-        if(animalOwner == null) return NotFound();
-        
+
+        if (animalOwner == null) return NotFound();
+
         return Ok(GetAnimalOwnerMapper.MapAnimalOwnerToGetAnimalOwnerResponse(animalOwner));
-    } 
+    }
 }

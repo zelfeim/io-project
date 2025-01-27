@@ -15,14 +15,14 @@ public class CreateAnimalOwnerController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<int>> Handle([FromBody]CreateAnimalOwnerRequest request)
+    public async Task<ActionResult<int>> Handle([FromBody] CreateAnimalOwnerRequest request)
     {
         var animalOwner = new Domain.Aggregates.AnimalOwnerAggregate.AnimalOwner(request.Name, request.Surname,
             request.Email, request.Address, request.Telephone);
-        
+
         _dbContext.AnimalOwners.Add(animalOwner);
         await _dbContext.SaveChangesAsync();
 
-        return animalOwner.Id;
+        return Created(string.Empty, animalOwner.Id);
     }
 }
