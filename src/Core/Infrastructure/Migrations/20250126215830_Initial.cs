@@ -54,7 +54,7 @@ namespace Application.Infrastructure.Migrations
                     Name = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
                     Type = table.Column<string>(type: "text", nullable: false),
                     Amount = table.Column<int>(type: "integer", nullable: false),
-                    ShelfLive = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    ShelfLive = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -113,14 +113,14 @@ namespace Application.Infrastructure.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     AnimalId = table.Column<int>(type: "integer", nullable: false),
+                    Date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     EmployeeId = table.Column<int>(type: "integer", nullable: false),
-                    Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    SuggestedTreatment = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: false),
+                    Prescription_PrescribedMeds = table.Column<string>(type: "text", nullable: true),
+                    SuggestedTreatment = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),
                     VisitInformation = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: false),
                     VisitLength = table.Column<long>(type: "bigint", nullable: false),
                     VisitStatus = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
-                    VisitType = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
-                    Prescription_PrescribedMeds = table.Column<string>(type: "text", nullable: true)
+                    VisitType = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false)
                 },
                 constraints: table =>
                 {
