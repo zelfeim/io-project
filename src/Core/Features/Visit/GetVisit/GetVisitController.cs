@@ -1,4 +1,5 @@
 using Application.Infrastructure.Persistence;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,6 +7,7 @@ namespace Application.Features.Visit.GetVisit;
 
 [ApiController]
 [Route("api/visit")]
+[Authorize(Roles = "Admin,Vet,Receptionist")]
 public class GetVisitController : ControllerBase
 {
     private readonly ApplicationDbContext _dbContext;
@@ -20,11 +22,8 @@ public class GetVisitController : ControllerBase
     {
         var visit = await _dbContext.Visits.SingleOrDefaultAsync(v => v.Id == id);
 
-        if (visit == null)
-        {
-            return NotFound();
-        }
+        if (visit == null) return NotFound();
 
-        return GetVisitMapper.MapVisitToGetVisitResponse(visit);
+        return Ok(GetVisitMapper.MapVisitToGetVisitResponse(visit));
     }
 }

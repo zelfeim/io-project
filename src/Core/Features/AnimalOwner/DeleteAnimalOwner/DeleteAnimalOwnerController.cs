@@ -1,10 +1,12 @@
 using Application.Infrastructure.Persistence;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Application.Features.AnimalOwner.DeleteAnimalOwner;
 
 [ApiController]
 [Route("api/animal-owner")]
+[Authorize(Roles = "Admin")]
 public class DeleteAnimalOwnerController : ControllerBase
 {
     private readonly ApplicationDbContext _dbContext;

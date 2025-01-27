@@ -20,10 +20,13 @@ public class EndVisitControllerTest : BaseIntegrationTest
     public EndVisitControllerTest(IntegrationTestWebApplicationFactory webApplicationFactory) : base(
         webApplicationFactory)
     {
-        DbContext.AnimalOwners.Add(new AnimalOwner("Animal", "Owner", "email@email.com", "Olsztyn", "123456789"));
+        DbContext.AnimalOwners.Add(
+            new Application.Domain.Aggregates.AnimalOwnerAggregate.AnimalOwner("Animal", "Owner", "email@email.com",
+                "Olsztyn", "123456789"));
         DbContext.Animals.Add(new Animal(1, "Animal", "Species", "Race", 15));
 
-        DbContext.Employees.Add(new Employee("EmployeeName", "EmployeeSurname", "Doctor", "EmployeeAddress"));
+        DbContext.Employees.Add(new Employee("EmployeeName", "EmployeeSurname", Role.Vet, "EmployeeAddress",
+            "e@mail.com", string.Empty));
 
         DbContext.Visits.Add(new Application.Domain.Aggregates.VisitAggregate.Visit(1, 1, DateTime.Parse("2500-01-01"),
             VisitType.Examination, 30));

@@ -10,15 +10,15 @@ namespace Application.Infrastructure.Persistence;
 
 public class ApplicationDbContext : DbContext
 {
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+    {
+    }
+
     public DbSet<Visit> Visits { get; set; }
     public DbSet<Animal> Animals { get; set; }
     public DbSet<AnimalOwner> AnimalOwners { get; set; }
     public DbSet<Employee> Employees { get; set; }
     public DbSet<Resources> Resources { get; set; }
-
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-    {
-    }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
