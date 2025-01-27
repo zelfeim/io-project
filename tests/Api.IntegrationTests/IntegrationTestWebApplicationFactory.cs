@@ -1,7 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Infrastructure.Persistence;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
@@ -10,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Testcontainers.PostgreSql;
 using Xunit;
 
-namespace Core.IntegrationTests;
+namespace Api.IntegrationTests;
 
 public class IntegrationTestWebApplicationFactory : WebApplicationFactory<Program>, IAsyncLifetime
 {
@@ -43,14 +42,6 @@ public class IntegrationTestWebApplicationFactory : WebApplicationFactory<Progra
             {
                 options.UseNpgsql(_dbContainer.GetConnectionString());
             });
-
-            // Use test authentication
-            services.AddAuthentication(o =>
-                {
-                    o.DefaultAuthenticateScheme = "Test";
-                    o.DefaultChallengeScheme = "Test";
-                })
-                .AddScheme<AuthenticationSchemeOptions, TestAuthHandler>("Test", _ => { });
         });
         base.ConfigureWebHost(builder);
     }

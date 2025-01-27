@@ -106,9 +106,15 @@ namespace Application.Infrastructure.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("character varying(150)");
 
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
                     b.Property<string>("Role")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.Property<string>("Surname")
                         .IsRequired()
@@ -254,6 +260,29 @@ namespace Application.Infrastructure.Migrations
                         });
 
                     b.Navigation("Email");
+                });
+
+            modelBuilder.Entity("Application.Domain.Aggregates.EmployeeAggregate.Employee", b =>
+                {
+                    b.OwnsOne("Application.Domain.Aggregates.AnimalOwnerAggregate.EmailAddress", "EmailAddress", b1 =>
+                        {
+                            b1.Property<int>("EmployeeId")
+                                .HasColumnType("integer");
+
+                            b1.Property<string>("Email")
+                                .IsRequired()
+                                .HasColumnType("text");
+
+                            b1.HasKey("EmployeeId");
+
+                            b1.ToTable("Employees");
+
+                            b1.WithOwner()
+                                .HasForeignKey("EmployeeId");
+                        });
+
+                    b.Navigation("EmailAddress")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Application.Domain.Aggregates.EmployeeAggregate.WorkSchedule", b =>

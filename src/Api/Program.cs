@@ -1,6 +1,8 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
+using Application.Features.Employee.Authentication;
 using Application.Infrastructure.Persistence;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,10 +24,35 @@ builder.Services.AddDbContext<ApplicationDbContext>(o =>
 });
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
+builder.Services.AddScoped<IEmployeeValidationService, EmployeeValidationService>();
+
+builder.Services
+    .AddAuthentication(options => options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(o =>
+    {
+        o.LoginPath = new PathString("/login");
+        o.LogoutPath = new PathString("/logout");
+        o.Events.OnRedirectToAccessDenied = o.Events.OnRedirectToLogin =
+            context =>
+            {
+                if (context.Request.Method == "GET")
+                {
+                    context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                    return Task.CompletedTask;
+                }
+
+                context.Response.Redirect(context.RedirectUri);
+                return Task.CompletedTask;
+            };
+    });
+builder.Services.AddAuthorization();
+
 var app = builder.Build();
 
-app.UseAuthorization();
+app.UseCookiePolicy();
+app.UseAuthentication();
 app.UseRouting();
+app.UseAuthorization();
 app.MapControllers();
 app.Run();
 

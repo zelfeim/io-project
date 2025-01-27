@@ -19,10 +19,18 @@ public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
             .HasMaxLength(150);
 
         builder.Property(e => e.Role)
-            .IsRequired();
+            .IsRequired()
+            .HasConversion<string>()
+            .HasMaxLength(50);
 
         builder.Property(e => e.Address)
             .IsRequired();
+
+        builder.OwnsOne(e => e.EmailAddress);
+
+        builder.Property(e => e.Password)
+            .IsRequired()
+            .HasMaxLength(256);
 
         builder.HasMany(e => e.WorkSchedule)
             .WithOne()

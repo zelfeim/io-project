@@ -1,10 +1,12 @@
 using Application.Infrastructure.Persistence;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Application.Features.AnimalOwner.CreateAnimalOwner;
 
 [ApiController]
 [Route("api/animal-owner")]
+[Authorize(Roles = "Receptionist")]
 public class CreateAnimalOwnerController : ControllerBase
 {
     private readonly ApplicationDbContext _dbContext;
