@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Application.Domain.Aggregates.VisitAggregate;
 using Application.Domain.Aggregates.VisitAggregate.Enums;
 using FluentAssertions;
@@ -11,6 +10,12 @@ namespace Core.UnitTests.Domain.Aggregates.VisitAggregate;
 [TestSubject(typeof(Visit))]
 public class VisitTest
 {
+    public static TheoryData<DateTime, int, string> RescheduleVisitTestData = new()
+    {
+        { DateTime.Now, 30, "Visit date must be in the future (Parameter 'date')" },
+        { DateTime.Now.AddHours(1), 0, "Visit length must be greater than zero (Parameter 'visitLength')" }
+    };
+
     [Fact]
     public void SetCancelledStatusShouldSetCancelledStatus()
     {
@@ -44,7 +49,7 @@ public class VisitTest
     {
         // Arrange
         var visit = new Visit(0, 0, DateTime.Now.AddHours(1), VisitType.Examination, 30);
-        
+
         // Act
         visit.RescheduleVisit(DateTime.Parse("2035-01-01"), 60);
 
@@ -54,19 +59,14 @@ public class VisitTest
         visit.VisitLength.Should().Be(60);
     }
 
-    public static TheoryData<DateTime, int, string> RescheduleVisitTestData = new()
-    {
-        { DateTime.Now, 30, "Visit date must be in the future (Parameter 'date')" },
-        { DateTime.Now.AddHours(1), 0, "Visit length must be greater than zero (Parameter 'visitLength')" },
-    };
-    
     [Theory]
     [MemberData(nameof(RescheduleVisitTestData))]
-    public void RescheduleVisitShouldThrowExceptionWhenValidationFails(DateTime date, int length, string expectedMessage)
+    public void RescheduleVisitShouldThrowExceptionWhenValidationFails(DateTime date, int length,
+        string expectedMessage)
     {
         // Arrange
         var visit = new Visit(0, 0, DateTime.Now.AddHours(1), VisitType.Examination, 30);
-        
+
         // Act
         var act = () => visit.RescheduleVisit(date, length);
 

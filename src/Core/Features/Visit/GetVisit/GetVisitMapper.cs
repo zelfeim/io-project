@@ -4,7 +4,7 @@ public static class GetVisitMapper
 {
     public static GetVisitResponse MapVisitToGetVisitResponse(Domain.Aggregates.VisitAggregate.Visit visit)
     {
-        return new GetVisitResponse()
+        return new GetVisitResponse
         {
             AnimalId = visit.AnimalId,
             EmployeeId = visit.EmployeeId,
@@ -14,7 +14,7 @@ public static class GetVisitMapper
             Prescription = visit.Prescription,
             SuggestedTreatment = visit.SuggestedTreatment,
             VisitInformation = visit.VisitInformation,
-            VisitLength = visit.VisitLength,
+            VisitLength = visit.VisitLength
         };
     }
 }

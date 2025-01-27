@@ -2,10 +2,11 @@ using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Application.Features.AnimalOwner.GetAnimalOwner;
+using Core.Tests;
 using FluentAssertions;
 using Xunit;
 
-namespace Core.Tests.Features.AnimalOwner;
+namespace Core.IntegrationTests.Features.AnimalOwner;
 
 public class GetAnimalOwnerControllerTests : BaseIntegrationTest
 {

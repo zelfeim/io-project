@@ -1,18 +1,17 @@
 using System;
 using System.Net.Http.Json;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Application.Domain.Aggregates.AnimalAggregate;
 using Application.Domain.Aggregates.EmployeeAggregate;
 using Application.Domain.Aggregates.VisitAggregate.Enums;
 using Application.Features.Visit.CreateVisit;
+using Core.Tests;
 using FluentAssertions;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 
-namespace Core.Tests.Features.Visit.CreateVisit;
+namespace Core.IntegrationTests.Features.Visit;
 
 [TestSubject(typeof(CreateVisitController))]
 public class CreateVisitControllerTest : BaseIntegrationTest

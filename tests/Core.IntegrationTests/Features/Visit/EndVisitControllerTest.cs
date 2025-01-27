@@ -1,19 +1,17 @@
 using System;
 using System.Net;
 using System.Net.Http.Json;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Application.Domain.Aggregates.AnimalAggregate;
-using Application.Domain.Aggregates.AnimalOwnerAggregate;
 using Application.Domain.Aggregates.EmployeeAggregate;
 using Application.Domain.Aggregates.VisitAggregate.Enums;
 using Application.Features.Visit.EndVisit;
+using Core.Tests;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 
-namespace Core.Tests.Features.Visit.EndVisit;
+namespace Core.IntegrationTests.Features.Visit;
 
 public class EndVisitControllerTest : BaseIntegrationTest
 {
@@ -37,7 +35,7 @@ public class EndVisitControllerTest : BaseIntegrationTest
     public async Task EndVisit_ShouldSetVisitStatusToCompleted()
     {
         // Arrange 
-        var request = new EndVisitRequest()
+        var request = new EndVisitRequest
         {
             SuggestedTreatment = "Rest",
             PrescribedMeds = "SomeMed"
@@ -46,15 +44,13 @@ public class EndVisitControllerTest : BaseIntegrationTest
         const int id = 1;
 
         // Act
-        var response = await Client.PostAsJsonAsync($"api/visit/{id}/end", request,
-            new JsonSerializerOptions()
-                { PropertyNamingPolicy = JsonNamingPolicy.CamelCase, Converters = { new JsonStringEnumConverter() } });
+        var response = await Client.PostAsJsonAsync($"api/visit/{id}/end", request, JsonOptions);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
-        
+
         DbContext.ChangeTracker.Clear();
-        
+
         var visit = await DbContext.Visits.SingleAsync(v => v.Id == id);
         visit.VisitStatus.Should().Be(VisitStatus.Completed);
         visit.SuggestedTreatment.Should().Be("Rest");

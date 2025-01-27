@@ -2,11 +2,12 @@ using System.Net;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using Application.Features.AnimalOwner.UpdateAnimalOwner;
+using Core.Tests;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 
-namespace Core.Tests.Features.AnimalOwner;
+namespace Core.IntegrationTests.Features.AnimalOwner;
 
 public class UpdateAnimalOwnerControllerTests : BaseIntegrationTest
 {
