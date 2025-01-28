@@ -35,18 +35,11 @@ builder.Services
     {
         o.LoginPath = new PathString("/login");
         o.LogoutPath = new PathString("/logout");
-        o.Events.OnRedirectToAccessDenied = o.Events.OnRedirectToLogin =
-            context =>
-            {
-                if (context.Request.Method == "GET")
-                {
-                    context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-                    return Task.CompletedTask;
-                }
-
-                context.Response.Redirect(context.RedirectUri);
-                return Task.CompletedTask;
-            };
+        o.Events.OnRedirectToAccessDenied = o.Events.OnRedirectToLogin = context =>
+        {
+            context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+            return Task.CompletedTask;
+        };
     });
 builder.Services.AddAuthorization();
 
