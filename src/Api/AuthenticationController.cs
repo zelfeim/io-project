@@ -55,4 +55,13 @@ public class AuthenticationController : ControllerBase
 
         return Ok();
     }
+
+    [HttpGet("roles")]
+    [Authorize]
+    public ActionResult<string> GetRole()
+    {
+        var roles = HttpContext.User.Claims.Single(c => c.Type == ClaimTypes.Role);
+
+        return Ok(roles.Value);
+    }
 }
