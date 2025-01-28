@@ -7,15 +7,15 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - 'src/Api/*'
-      - 'src/Core/*'
-      - 'test'
+      - 'src/Api/**'
+      - 'src/Core/**'
+      - 'test/**'
   pull_request:
     branches: [ "main" ]
     paths: 
-      - 'src/Api/*'
-      - 'src/Core/*'
-      - 'test'
+      - 'src/Api/**'
+      - 'src/Core/**'
+      - 'test/**'
 
 jobs:
   build:
