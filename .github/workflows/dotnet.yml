@@ -18,7 +18,7 @@ on:
       - 'test'
 
 jobs:
-  dotnet-build:
+  build:
 
     runs-on: ubuntu-latest
 
