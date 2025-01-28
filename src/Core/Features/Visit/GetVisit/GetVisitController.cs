@@ -32,8 +32,6 @@ public class GetVisitController : ControllerBase
     {
         var visits = await _dbContext.Visits.ToListAsync();
 
-        if (visits.Count == 0) return NotFound();
-
         return Ok(visits.Select(GetVisitMapper.MapVisitToGetVisitResponse));
     }
 }

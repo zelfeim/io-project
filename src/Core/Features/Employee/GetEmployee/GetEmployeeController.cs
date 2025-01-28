@@ -25,8 +25,6 @@ public class GetEmployeeController : ControllerBase
     {
         var employees = await _dbContext.Employees.ToListAsync();
 
-        if (employees.Count == 0) return NotFound();
-
         return Ok(employees);
     }
 

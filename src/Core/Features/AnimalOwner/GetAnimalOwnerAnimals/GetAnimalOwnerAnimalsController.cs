@@ -26,8 +26,6 @@ public class GetAnimalOwnerAnimalsController : ControllerBase
     {
         var animals = _dbContext.Animals.Where(a => a.AnimalOwnerId == id).ToList();
 
-        if (animals.Count == 0) return NotFound();
-
         return Ok(animals.Select(GetAnimalMapper.MapAnimalToGetAnimalResponse));
     }
 }

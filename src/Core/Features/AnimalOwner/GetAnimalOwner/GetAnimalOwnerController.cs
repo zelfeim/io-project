@@ -32,8 +32,6 @@ public class GetAnimalOwnerController : ControllerBase
     {
         var animalOwners = await _dbContext.AnimalOwners.ToListAsync();
 
-        if (animalOwners.Count == 0) return NotFound();
-
         return Ok(animalOwners.Select(GetAnimalOwnerMapper.MapAnimalOwnerToGetAnimalOwnerResponse));
     }
 }

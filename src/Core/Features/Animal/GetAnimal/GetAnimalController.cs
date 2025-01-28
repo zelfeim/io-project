@@ -35,8 +35,6 @@ public class GetAnimalController : ControllerBase
     {
         var animals = await _dbContext.Animals.ToListAsync();
 
-        if (animals.Count == 0) return NotFound();
-
         return Ok(animals.Select(GetAnimalMapper.MapAnimalToGetAnimalResponse));
     }
 }
