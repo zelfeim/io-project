@@ -18,12 +18,22 @@ public class GetVisitController : ControllerBase
     }
 
     [HttpGet("{id:int}")]
-    public async Task<ActionResult<GetVisitResponse>> Handle(int id)
+    public async Task<ActionResult<GetVisitResponse>> GetSingle(int id)
     {
         var visit = await _dbContext.Visits.SingleOrDefaultAsync(v => v.Id == id);
 
         if (visit == null) return NotFound();
 
         return Ok(GetVisitMapper.MapVisitToGetVisitResponse(visit));
+    }
+
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<GetVisitResponse>>> GetAll()
+    {
+        var visits = await _dbContext.Visits.ToListAsync();
+
+        if (visits.Count == 0) return NotFound();
+
+        return Ok(visits.Select(GetVisitMapper.MapVisitToGetVisitResponse));
     }
 }

@@ -1,11 +1,14 @@
 using Application.Infrastructure.Persistence;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace Application.Features.Employee.GetEmployee;
 
 [ApiController]
 [Route("api/employee")]
+[Authorize(Roles = "Admin")]
 public class GetEmployeeController : ControllerBase
 {
     private readonly ApplicationDbContext _dbContext;
@@ -18,9 +21,9 @@ public class GetEmployeeController : ControllerBase
     }
 
     [HttpGet]
-    public ActionResult<List<GetEmployeeResponse>> Handle()
+    public async Task<ActionResult<List<GetEmployeeResponse>>> GetAll()
     {
-        var employees = _dbContext.Employees.ToList();
+        var employees = await _dbContext.Employees.ToListAsync();
 
         if (employees.Count == 0) return NotFound();
 
@@ -28,7 +31,7 @@ public class GetEmployeeController : ControllerBase
     }
 
     [HttpGet("{id:int}")]
-    public ActionResult<GetEmployeeResponse> Handle(int id)
+    public ActionResult<GetEmployeeResponse> GetSingle(int id)
     {
         var employee = _dbContext.Employees.Find(id);
 
