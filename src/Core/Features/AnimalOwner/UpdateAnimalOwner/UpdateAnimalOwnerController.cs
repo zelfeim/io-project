@@ -17,7 +17,7 @@ public class UpdateAnimalOwnerController : ControllerBase
         _dbContext = dbContext;
     }
 
-    [Route("{id:int}/update")]
+    [HttpPut("{id:int}/update")]
     public async Task<ActionResult> Handle(int id, [FromBody] UpdateAnimalOwnerRequest request)
     {
         var animalOwner = await _dbContext.AnimalOwners.SingleOrDefaultAsync(o => o.Id == id);
