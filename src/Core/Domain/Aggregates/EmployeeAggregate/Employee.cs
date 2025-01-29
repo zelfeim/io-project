@@ -28,4 +28,12 @@ public class Employee : IEntity, IAggregateRoot
 
     public string Password { get; private set; }
     public int Id { get; }
+
+    public void NewShift(WorkSchedule newShift)
+    {
+        foreach (var shift in WorkSchedule.Where(shift => shift.Date == newShift.Date))
+            throw new Exception($"Day {shift.Date} already has a shift.");
+
+        WorkSchedule.Add(newShift);
+    }
 }
