@@ -19,7 +19,7 @@ builder.Services.AddControllers()
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(o => o.EnableAnnotations());
 
 builder.Services.AddDbContext<ApplicationDbContext>(o =>
 {

@@ -27,10 +27,12 @@ public class AuthenticationController : ControllerBase
         if (!_employeeValidationService.ValidateCredentials(request.Email, request.Password)) return Unauthorized();
 
         var role = _employeeValidationService.GetRole(request.Email);
+        var id = _employeeValidationService.GetId(request.Email);
 
         var claims = new List<Claim>
         {
             new(ClaimTypes.Name, request.Email),
+            new(ClaimTypes.NameIdentifier, id.ToString()),
             new(ClaimTypes.Role, role.ToString())
         };
 

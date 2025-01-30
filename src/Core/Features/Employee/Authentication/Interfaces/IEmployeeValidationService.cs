@@ -6,4 +6,5 @@ public interface IEmployeeValidationService
 {
     bool ValidateCredentials(string email, string password);
     Role GetRole(string email);
+    int GetId(string requestEmail);
 }

@@ -28,4 +28,13 @@ public class EmployeeValidationService : IEmployeeValidationService
 
         return employee.Role;
     }
+
+    public int GetId(string email)
+    {
+        var employee = _dbContext.Employees.SingleOrDefaultAsync(e => e.EmailAddress.Email == email).Result;
+
+        if (employee == null) throw new ArgumentException("Employee not found.");
+
+        return employee.Id;
+    }
 }
