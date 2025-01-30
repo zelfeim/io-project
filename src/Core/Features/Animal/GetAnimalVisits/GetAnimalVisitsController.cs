@@ -1,4 +1,4 @@
-using Application.Features.Animal.GetAnimal;
+using Application.Features.Visit.GetVisit;
 using Application.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -21,10 +21,10 @@ public class GetAnimalVisitsController : ControllerBase
     }
 
     [HttpGet("{id:int}/visits")]
-    public ActionResult<IEnumerable<GetAnimalResponse>> GetAnimalVisits([FromRoute] int id)
+    public ActionResult<IEnumerable<GetVisitResponse>> GetAnimalVisits([FromRoute] int id)
     {
-        var animals = _dbContext.Animals.Where(a => a.Id == id).ToList();
+        var visits = _dbContext.Visits.Where(v => v.Id == id).ToList();
 
-        return Ok(animals.Select(GetAnimalMapper.MapAnimalToGetAnimalResponse));
+        return Ok(visits.Select(GetVisitMapper.MapVisitToGetVisitResponse));
     }
 }
