@@ -6,7 +6,7 @@ import { ROLE_TRANSLATIONS } from '@/translations/employee.ts';
 import type { ComputedRef, Ref } from 'vue';
 import { computed, ref } from 'vue';
 import type { Employee } from '@/types/employee.ts';
-import useDeleteEmployee from '@/queries/use-delete-employee.ts';
+import useDeleteEmployee from '@/views/employees/queries/use-delete-employee.ts';
 import { ElNotification } from 'element-plus';
 import useHasAnyRole from '@/composables/use-has-any-role.ts';
 import Role from '@/enums/role.ts';

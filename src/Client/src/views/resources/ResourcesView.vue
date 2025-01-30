@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import useGetResources from '@/queries/use-get-resources.ts';
+import useGetResources from '@/views/resources/queries/use-get-resources.ts';
 import RoutePath from '@/enums/route-path.ts';
 import { useRouter } from 'vue-router';
-import useDeleteResource from '@/queries/use-delete-resource.ts';
+import useDeleteResource from '@/views/resources/queries/use-delete-resource.ts';
 import type { ComputedRef, Ref } from 'vue';
 import { computed, ref } from 'vue';
 import type { Resource } from '@/types/resource.ts';
-import useUpdateResourceAmount from '@/queries/use-update-resource-amount.ts';
+import useUpdateResourceAmount from '@/views/resources/queries/use-update-resource-amount.ts';
 import { ElNotification } from 'element-plus';
 
 const { push } = useRouter();

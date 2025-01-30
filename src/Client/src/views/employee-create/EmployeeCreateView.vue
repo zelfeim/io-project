@@ -3,7 +3,7 @@ import ControlErrorComponent from '@/components/control-error/ControlErrorCompon
 import useCreateEmployeeValidation from '@/views/employee-create/composables/use-create-employee-validation.ts';
 import Role from '@/enums/role.ts';
 import { ROLE_TRANSLATIONS } from '@/translations/employee.ts';
-import useCreateEmployee from '@/queries/use-create-employee.ts';
+import useCreateEmployee from '@/views/employee-create/queries/use-create-employee.ts';
 import { useRouter } from 'vue-router';
 import RoutePath from '@/enums/route-path.ts';
 import { ElNotification } from 'element-plus';

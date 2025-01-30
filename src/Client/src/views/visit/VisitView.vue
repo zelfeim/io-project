@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import useGetVisit from '@/queries/use-get-visit.ts';
+import useGetVisit from '@/views/visit/queries/use-get-visit.ts';
 import { useRoute, useRouter } from 'vue-router';
 import { VISIT_STATUS_TRANSLATIONS, VISIT_TYPE_TRANSLATIONS } from '../../translations/visit.ts';
 import useGetAnimals from '@/views/animals/queries/use-get-animals.ts';
