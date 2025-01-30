@@ -8,7 +8,6 @@ namespace Application.Features.Animal.GetAnimalVisits;
 
 [ApiController]
 [Route("api/animal")]
-[Authorize(Roles = "Admin,Vet,Receptionist")]
 public class GetAnimalVisitsController : ControllerBase
 {
     private readonly ApplicationDbContext _dbContext;
@@ -21,6 +20,7 @@ public class GetAnimalVisitsController : ControllerBase
     }
 
     [HttpGet("{id:int}/visits")]
+    [Authorize(Roles = "Vet,Receptionist")]
     public ActionResult<IEnumerable<GetVisitResponse>> GetAnimalVisits([FromRoute] int id)
     {
         var visits = _dbContext.Visits.Where(v => v.Id == id).ToList();

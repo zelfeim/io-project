@@ -7,7 +7,7 @@ namespace Application.Features.Visit.GetVisit;
 
 [ApiController]
 [Route("api/visit")]
-[Authorize(Roles = "Admin,Vet,Receptionist")]
+[Authorize(Roles = "Vet,Receptionist")]
 public class GetVisitController : ControllerBase
 {
     private readonly ApplicationDbContext _dbContext;

@@ -7,7 +7,6 @@ namespace Application.Features.AnimalOwner.UpdateAnimalOwner;
 
 [ApiController]
 [Route("api/animal-owner")]
-[Authorize(Roles = "Vet,Receptionist")]
 public class UpdateAnimalOwnerController : ControllerBase
 {
     private readonly ApplicationDbContext _dbContext;
@@ -18,6 +17,7 @@ public class UpdateAnimalOwnerController : ControllerBase
     }
 
     [HttpPut("{id:int}/update")]
+    [Authorize(Roles = "Receptionist")]
     public async Task<ActionResult> Handle(int id, [FromBody] UpdateAnimalOwnerRequest request)
     {
         var animalOwner = await _dbContext.AnimalOwners.SingleOrDefaultAsync(o => o.Id == id);

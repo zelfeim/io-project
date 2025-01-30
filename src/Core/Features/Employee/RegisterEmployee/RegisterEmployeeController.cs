@@ -7,7 +7,6 @@ namespace Application.Features.Employee.RegisterEmployee;
 
 [ApiController]
 [Route("api/employee")]
-[Authorize(Roles = "Admin")]
 public class RegisterEmployeeController : ControllerBase
 {
     private readonly ApplicationDbContext _dbContext;
@@ -20,6 +19,7 @@ public class RegisterEmployeeController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "Admin")]
     public async Task<ActionResult<int>> Create([FromBody] CreateEmployeeRequest request)
     {
         var employee = RegisterEmployeeMapper.MapCreateEmployeeRequestToEmployee(request);

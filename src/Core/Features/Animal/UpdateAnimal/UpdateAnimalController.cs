@@ -7,7 +7,6 @@ namespace Application.Features.Animal.UpdateAnimal;
 
 [ApiController]
 [Route("api/animal")]
-[Authorize(Roles = "Vet,Receptionist")]
 public class UpdateAnimalController : ControllerBase
 {
     private readonly ApplicationDbContext _dbContext;
@@ -20,6 +19,7 @@ public class UpdateAnimalController : ControllerBase
     }
 
     [HttpPut("{id:int}")]
+    [Authorize(Roles = "Vet,Receptionist")]
     public async Task<ActionResult> Handle(int id, [FromBody] UpdateAnimalRequest request)
     {
         var animal = await _dbContext.Animals.FindAsync(id);
@@ -35,12 +35,4 @@ public class UpdateAnimalController : ControllerBase
 
         return Ok();
     }
-}
-
-public record UpdateAnimalRequest
-{
-    public string Name { get; set; }
-    public int Age { get; set; }
-    public string Race { get; set; }
-    public string Species { get; set; }
 }

@@ -21,7 +21,7 @@ public class GetResourceController : ControllerBase
     }
 
     [HttpGet("{id:int}")]
-    [Authorize(Roles = "Admin,Vet,Receptionist")]
+    [Authorize(Roles = "Vet")]
     [SwaggerOperation(Tags = ["Resource"])]
     public async Task<ActionResult<GetResourceResponse>> GetResourceById(int id)
     {
@@ -33,7 +33,7 @@ public class GetResourceController : ControllerBase
     }
 
     [HttpGet]
-    [Authorize(Roles = "Admin,Vet,Receptionist")]
+    [Authorize(Roles = "Vet")]
     [SwaggerOperation(Tags = ["Resource"])]
     public async Task<ActionResult<IEnumerable<GetResourceResponse>>> GetResource()
     {

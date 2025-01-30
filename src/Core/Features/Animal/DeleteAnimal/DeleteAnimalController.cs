@@ -7,7 +7,6 @@ namespace Application.Features.Animal.DeleteAnimal;
 
 [ApiController]
 [Route("api/animal")]
-[Authorize(Roles = "Admin,Vet,Receptionist")]
 public class DeleteAnimalController : ControllerBase
 {
     private readonly ApplicationDbContext _dbContext;
@@ -20,6 +19,7 @@ public class DeleteAnimalController : ControllerBase
     }
 
     [HttpDelete("{id:int}")]
+    [Authorize(Roles = "Receptionist")]
     public async Task<ActionResult> Handle(int id)
     {
         var animal = await _dbContext.Animals.FindAsync(id);

@@ -8,7 +8,6 @@ namespace Application.Features.Employee.GetEmployeeVisits;
 
 [ApiController]
 [Route("api/employee")]
-[Authorize(Roles = "Admin,Vet,Receptionist")]
 public class GetEmployeeVisitsController : ControllerBase
 {
     private readonly ApplicationDbContext _dbContext;
@@ -21,6 +20,7 @@ public class GetEmployeeVisitsController : ControllerBase
     }
 
     [HttpGet("{id:int}/visits")]
+    [Authorize(Roles = "Admin,Vet,Receptionist")]
     public ActionResult<IEnumerable<GetVisitResponse>> GetEmployeeVisits([FromRoute] int id)
     {
         _logger.LogInformation("{Controller} called", nameof(GetEmployeeVisits));

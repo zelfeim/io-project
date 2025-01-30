@@ -20,7 +20,7 @@ public class UpdateResourceController : ControllerBase
     }
 
     [HttpPut("{id:int}")]
-    [Authorize(Roles = "Admin,Vet")]
+    [Authorize(Roles = "Vet")]
     [SwaggerOperation(Tags = ["Resource"])]
     public async Task<ActionResult> UpdateResourceAmount(int id, [FromBody] UpdateResourceRequest request)
     {
