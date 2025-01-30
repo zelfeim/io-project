@@ -1,0 +1,14 @@
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Poppins', serif;
+}
+
+.el-table thead {
+    color: var(--el-text-color-regular) !important;
+}
+
+.form-disclaimer {
+    font-size: 14px;
+    color: var(--el-text-color-regular);
+}
