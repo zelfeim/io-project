@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory, type Router } from 'vue-router';
 import HomeView from '@/views/home/HomeView.vue';
 import RoutePath from '@/enums/route-path.ts';
-import registerGuards from '@/router/register-guards.ts';
 import LoginView from '@/views/login/LoginView.vue';
 import AnimalOwnerCreateView from '@/views/animal-owner-create/AnimalOwnerCreateView.vue';
 import AnimalOwnersView from '@/views/animal-owners/AnimalOwnersView.vue';
@@ -171,7 +170,5 @@ const router: Router = createRouter({
         },
     ],
 });
-
-registerGuards(router);
 
 export default router;
