@@ -23,7 +23,7 @@ public class DeleteShiftController : ControllerBase
     // TODO make it better
     [HttpDelete("/shift/{id:int}")]
     [Authorize(Roles = "Admin")]
-    [SwaggerOperation(Tags = ["Employee"])]
+    [SwaggerOperation(Tags = ["WorkSchedule"])]
     public async Task<ActionResult> DeleteShiftById(int id)
     {
         var employees = await _dbContext.Employees.Include(e => e.WorkSchedule).ToListAsync();

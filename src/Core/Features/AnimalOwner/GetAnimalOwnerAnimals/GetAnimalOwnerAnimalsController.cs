@@ -3,6 +3,7 @@ using Application.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Application.Features.AnimalOwner.GetAnimalOwnerAnimals;
 
@@ -22,6 +23,7 @@ public class GetAnimalOwnerAnimalsController : ControllerBase
 
     [HttpGet("{id:int}/animals")]
     [Authorize(Roles = "Vet,Receptionist")]
+    [SwaggerOperation(Tags = ["AnimalOwner"])]
     public ActionResult<IEnumerable<GetAnimalResponse>> GetAnimalsForAnimalOwner(int id)
     {
         var animals = _dbContext.Animals.Where(a => a.AnimalOwnerId == id).ToList();

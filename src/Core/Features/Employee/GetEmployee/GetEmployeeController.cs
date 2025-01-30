@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Application.Features.Employee.GetEmployee;
 
@@ -21,6 +22,7 @@ public class GetEmployeeController : ControllerBase
 
     [HttpGet]
     [Authorize(Roles = "Admin")]
+    [SwaggerOperation(Tags = ["Employee"])]
     public async Task<ActionResult<List<GetEmployeeResponse>>> GetAll()
     {
         var employees = await _dbContext.Employees.ToListAsync();
@@ -30,6 +32,7 @@ public class GetEmployeeController : ControllerBase
 
     [HttpGet("{id:int}")]
     [Authorize(Roles = "Admin")]
+    [SwaggerOperation(Tags = ["Employee"])]
     public ActionResult<GetEmployeeResponse> GetSingle(int id)
     {
         var employee = _dbContext.Employees.Find(id);

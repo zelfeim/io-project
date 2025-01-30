@@ -1,12 +1,12 @@
 using Application.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Application.Features.Visit.CreateVisit;
 
 [ApiController]
 [Route("api/visit")]
-[Authorize(Roles = "Receptionist")]
 public class CreateVisitController : ControllerBase
 {
     private readonly ApplicationDbContext _dbContext;
@@ -17,6 +17,8 @@ public class CreateVisitController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "Receptionist")]
+    [SwaggerOperation(Tags = ["Visit"])]
     public async Task<ActionResult<int>> Handle([FromBody] CreateVisitRequest request)
     {
         var visit = new Domain.Aggregates.VisitAggregate.Visit(

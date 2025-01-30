@@ -1,6 +1,7 @@
 using Application.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Application.Features.AnimalOwner.DeleteAnimalOwner;
 
@@ -17,6 +18,7 @@ public class DeleteAnimalOwnerController : ControllerBase
 
     [HttpDelete("{id:int}")]
     [Authorize(Roles = "Receptionist")]
+    [SwaggerOperation(Tags = ["AnimalOwner"])]
     public async Task<ActionResult> Handle(int id)
     {
         var animalOwner = await _dbContext.AnimalOwners.FindAsync(id);

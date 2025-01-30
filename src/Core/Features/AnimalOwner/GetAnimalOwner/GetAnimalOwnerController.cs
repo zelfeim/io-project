@@ -2,6 +2,7 @@ using Application.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Application.Features.AnimalOwner.GetAnimalOwner;
 
@@ -18,6 +19,7 @@ public class GetAnimalOwnerController : ControllerBase
 
     [HttpGet("{id:int}")]
     [Authorize(Roles = "Vet,Receptionist")]
+    [SwaggerOperation(Tags = ["AnimalOwner"])]
     public async Task<ActionResult<GetAnimalOwnerResponse>> GetSingle(int id)
     {
         var animalOwner = await _dbContext.AnimalOwners.SingleOrDefaultAsync(o => o.Id == id);
@@ -29,6 +31,7 @@ public class GetAnimalOwnerController : ControllerBase
 
     [HttpGet]
     [Authorize(Roles = "Vet,Receptionist")]
+    [SwaggerOperation(Tags = ["AnimalOwner"])]
     public async Task<ActionResult<IEnumerable<GetAnimalOwnerResponse>>> GetAll()
     {
         var animalOwners = await _dbContext.AnimalOwners.ToListAsync();

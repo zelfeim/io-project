@@ -2,12 +2,12 @@ using Application.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Application.Features.Visit.CancelVisit;
 
 [ApiController]
 [Route("api/visit")]
-[Authorize(Roles = "Receptionist")]
 public class CancelVisitController : ControllerBase
 {
     private readonly ApplicationDbContext _dbContext;
@@ -18,6 +18,8 @@ public class CancelVisitController : ControllerBase
     }
 
     [HttpPut("{id:int}/cancel")]
+    [Authorize(Roles = "Receptionist")]
+    [SwaggerOperation(Tags = ["Visit"])]
     public async Task<ActionResult> Handle(int id)
     {
         var visit = await _dbContext.Visits.SingleOrDefaultAsync(v => v.Id == id);

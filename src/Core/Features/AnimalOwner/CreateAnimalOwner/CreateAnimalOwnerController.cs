@@ -1,6 +1,7 @@
 using Application.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Application.Features.AnimalOwner.CreateAnimalOwner;
 
@@ -17,6 +18,7 @@ public class CreateAnimalOwnerController : ControllerBase
 
     [HttpPost]
     [Authorize(Roles = "Receptionist")]
+    [SwaggerOperation(Tags = ["AnimalOwner"])]
     public async Task<ActionResult<int>> Handle([FromBody] CreateAnimalOwnerRequest request)
     {
         var animalOwner = new Domain.Aggregates.AnimalOwnerAggregate.AnimalOwner(request.Name, request.Surname,
