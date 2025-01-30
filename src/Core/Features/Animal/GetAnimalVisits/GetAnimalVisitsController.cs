@@ -25,7 +25,7 @@ public class GetAnimalVisitsController : ControllerBase
     [SwaggerOperation(Tags = ["Animal"])]
     public ActionResult<IEnumerable<GetVisitResponse>> GetAnimalVisits([FromRoute] int id)
     {
-        var visits = _dbContext.Visits.Where(v => v.Id == id).ToList();
+        var visits = _dbContext.Visits.Where(v => v.AnimalId == id).ToList();
 
         return Ok(visits.Select(GetVisitMapper.MapVisitToGetVisitResponse));
     }

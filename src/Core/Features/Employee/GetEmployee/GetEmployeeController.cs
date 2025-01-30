@@ -21,7 +21,7 @@ public class GetEmployeeController : ControllerBase
     }
 
     [HttpGet]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,Receptionist")]
     [SwaggerOperation(Tags = ["Employee"])]
     public async Task<ActionResult<List<GetEmployeeResponse>>> GetAll()
     {
@@ -31,7 +31,7 @@ public class GetEmployeeController : ControllerBase
     }
 
     [HttpGet("{id:int}")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,Receptionist")]
     [SwaggerOperation(Tags = ["Employee"])]
     public ActionResult<GetEmployeeResponse> GetSingle(int id)
     {
