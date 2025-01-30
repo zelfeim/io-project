@@ -40,7 +40,7 @@ public class GetEmployeeVisitsController : ControllerBase
     {
         var id = HttpContext.User.Claims.Single(c => c.Type == ClaimTypes.NameIdentifier);
 
-        var visits = _dbContext.Visits.Where(v => v.EmployeeId == Convert.ToInt32(id)).ToList();
+        var visits = _dbContext.Visits.Where(v => v.EmployeeId == Convert.ToInt32(id.Value)).ToList();
 
         return Ok(visits.Select(GetVisitMapper.MapVisitToGetVisitResponse));
     }
