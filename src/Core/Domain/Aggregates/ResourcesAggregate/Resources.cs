@@ -6,7 +6,7 @@ public class Resources : IEntity, IAggregateRoot
     {
     }
 
-    public Resources(string name, string type, int amount, DateTime shelfLive)
+    public Resources(string name, ResourceType type, int amount, DateTime shelfLive)
     {
         Name = name;
         Type = type;
@@ -15,8 +15,14 @@ public class Resources : IEntity, IAggregateRoot
     }
 
     public string Name { get; }
-    public string Type { get; }
+    public ResourceType Type { get; }
     public int Amount { get; set; }
     public DateTime ShelfLive { get; }
     public int Id { get; }
+}
+
+public enum ResourceType
+{
+    Medicine,
+    Equipment
 }
