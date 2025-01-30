@@ -10,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Logging.AddConsole();
 builder.Logging.AddDebug();
 
+builder.Services.AddCors();
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
@@ -45,6 +46,12 @@ builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
+app.UseCors(options => options
+    .AllowAnyHeader()
+    .AllowAnyMethod()
+    .SetIsOriginAllowed(options => true)
+    .AllowCredentials()
+);
 app.UseCookiePolicy();
 app.UseAuthentication();
 app.UseRouting();
