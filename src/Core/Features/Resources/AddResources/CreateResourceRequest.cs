@@ -1,12 +1,11 @@
 using Application.Domain.Aggregates.ResourcesAggregate;
 
-namespace Application.Features.Resources.GetResource;
+namespace Application.Features.Resources.AddResources;
 
-public record GetResourceResponse
+public record CreateResourceRequest
 {
     public required string Name { get; init; }
     public ResourceType Type { get; init; }
     public int Amount { get; init; }
-    public DateTime ShelfLive { get; init; }
-    public int Id { get; init; }
+    public DateTime ShelfLife { get; init; }
 }

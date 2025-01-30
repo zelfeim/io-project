@@ -14,7 +14,10 @@ public class ResourcesConfiguration : IEntityTypeConfiguration<Resources>
             .IsRequired()
             .HasMaxLength(150);
 
-        builder.Property(r => r.Type);
+        builder.Property(r => r.Type)
+            .IsRequired()
+            .HasConversion<string>()
+            .HasMaxLength(30);
 
         builder.Property(r => r.Amount);
 
