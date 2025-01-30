@@ -34,11 +34,3 @@ public class CreateResourceController : ControllerBase
         return Ok(resource.Id);
     }
 }
-
-public record CreateResourceRequest
-{
-    public required string Name { get; init; }
-    public required string Type { get; init; }
-    public int Amount { get; init; }
-    public DateTime ShelfLife { get; init; }
-}
