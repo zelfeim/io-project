@@ -57,7 +57,7 @@ const getAnimalOwnerName = (id: number): string => {
                 </el-table-column>
                 <el-table-column prop="visitInformation" label="Informacje" />
                 <el-table-column prop="suggestedTreatment" label="Zalecenia" />
-                <el-table-column prop="prescription" label="Recepta" />
+                <el-table-column prop="prescription.prescribedMeds" label="Recepta" />
             </el-table>
         </div>
 

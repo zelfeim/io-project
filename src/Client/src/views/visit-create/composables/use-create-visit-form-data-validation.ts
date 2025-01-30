@@ -1,12 +1,21 @@
-import { storeToRefs } from 'pinia';
-import createVisitFormDataStore from '@/views/visit-create/stores/create-visit-form-data-store.ts';
 import type { ValidationArgs } from '@vuelidate/core';
 import { useVuelidate } from '@vuelidate/core';
 import type { CreateVisitFormData } from '@/views/visit-create/types';
 import { requiredValidator } from '@/validators';
+import { ref, type Ref } from 'vue';
 
 const useCreateVisitFormDataValidation = () => {
-    const { data } = storeToRefs(createVisitFormDataStore());
+    const defaultDate: Date = new Date();
+    defaultDate.setDate(defaultDate.getDate() + 1);
+
+    const data: Ref<CreateVisitFormData> = ref({
+        type: null,
+        date: defaultDate,
+        animalId: null,
+        visitInformation: '',
+        visitLength: 0,
+        employeeId: null,
+    });
 
     const rules: ValidationArgs<CreateVisitFormData> = {
         animalId: {
