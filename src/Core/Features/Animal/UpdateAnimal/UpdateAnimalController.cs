@@ -2,6 +2,7 @@ using Application.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Application.Features.Animal.UpdateAnimal;
 
@@ -20,6 +21,7 @@ public class UpdateAnimalController : ControllerBase
 
     [HttpPut("{id:int}")]
     [Authorize(Roles = "Vet,Receptionist")]
+    [SwaggerOperation(Tags = ["Animal"])]
     public async Task<ActionResult> Handle(int id, [FromBody] UpdateAnimalRequest request)
     {
         var animal = await _dbContext.Animals.FindAsync(id);

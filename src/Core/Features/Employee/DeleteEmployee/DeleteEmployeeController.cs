@@ -2,6 +2,7 @@ using Application.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Application.Features.Employee.DeleteEmployee;
 
@@ -19,7 +20,8 @@ public class DeleteEmployeeController : ControllerBase
     }
 
     [HttpDelete("{id:int}")]
-    [Authorize(Roles = "Admin")] 
+    [Authorize(Roles = "Admin")]
+    [SwaggerOperation(Tags = ["Employee"])]
     public async Task<ActionResult> Handle(int id)
     {
         var employee = await _dbContext.Employees.FindAsync(id);

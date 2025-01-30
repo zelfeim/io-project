@@ -23,7 +23,7 @@ public class GetShiftController : ControllerBase
 
     [HttpGet("{id:int}/shift")]
     [Authorize(Roles = "Admin,Vet")]
-    [SwaggerOperation(Tags = ["Employee"])]
+    [SwaggerOperation(Tags = ["WorkSchedule"])]
     public async Task<ActionResult<IEnumerable<GetShiftResponse>>> GetShiftsForEmployeeByIdAsync(int id)
     {
         var employee = await _dbContext.Employees

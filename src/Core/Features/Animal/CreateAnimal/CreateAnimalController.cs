@@ -2,6 +2,7 @@ using Application.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Application.Features.Animal.CreateAnimal;
 
@@ -20,6 +21,7 @@ public class CreateAnimalController : ControllerBase
 
     [HttpPost]
     [Authorize(Roles = "Receptionist")]
+    [SwaggerOperation(Tags = ["Animal"])]
     public async Task<ActionResult<int>> Handle([FromBody] CreateAnimalRequest request)
     {
         var animal = new Domain.Aggregates.AnimalAggregate.Animal(request.AnimalOwnerId, request.Name, request.Species,

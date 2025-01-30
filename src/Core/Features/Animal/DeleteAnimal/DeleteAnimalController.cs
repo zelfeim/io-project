@@ -2,6 +2,7 @@ using Application.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Application.Features.Animal.DeleteAnimal;
 
@@ -20,6 +21,7 @@ public class DeleteAnimalController : ControllerBase
 
     [HttpDelete("{id:int}")]
     [Authorize(Roles = "Receptionist")]
+    [SwaggerOperation(Tags = ["Animal"])]
     public async Task<ActionResult> Handle(int id)
     {
         var animal = await _dbContext.Animals.FindAsync(id);

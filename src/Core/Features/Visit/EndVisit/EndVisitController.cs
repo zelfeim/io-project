@@ -2,6 +2,7 @@ using Application.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Application.Features.Visit.EndVisit;
 
@@ -18,6 +19,7 @@ public class EndVisitController : ControllerBase
 
     [HttpPost("{id:int}/end")]
     [Authorize(Roles = "Vet")]
+    [SwaggerOperation(Tags = ["Visit"])]
     public async Task<ActionResult> Handle(int id, [FromBody] EndVisitRequest request)
     {
         var visit = await _dbContext.Visits.SingleOrDefaultAsync(v => v.Id == id);

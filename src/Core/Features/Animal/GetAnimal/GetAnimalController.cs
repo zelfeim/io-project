@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Application.Features.Animal.GetAnimal;
 
@@ -21,6 +22,7 @@ public class GetAnimalController : ControllerBase
 
     [HttpGet("{id:int}")]
     [Authorize(Roles = "Vet,Receptionist")]
+    [SwaggerOperation(Tags = ["Animal"])]
     public async Task<ActionResult<GetAnimalResponse>> GetSingle(int id)
     {
         var animal = await _dbContext.Animals.FindAsync(id);
@@ -32,6 +34,7 @@ public class GetAnimalController : ControllerBase
 
     [HttpGet]
     [Authorize(Roles = "Vet,Receptionist")]
+    [SwaggerOperation(Tags = ["Animal"])]
     public async Task<ActionResult<IEnumerable<GetAnimalResponse>>> GetAll()
     {
         var animals = await _dbContext.Animals.ToListAsync();

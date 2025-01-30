@@ -3,6 +3,7 @@ using Application.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Application.Features.Animal.GetAnimalVisits;
 
@@ -21,6 +22,7 @@ public class GetAnimalVisitsController : ControllerBase
 
     [HttpGet("{id:int}/visits")]
     [Authorize(Roles = "Vet,Receptionist")]
+    [SwaggerOperation(Tags = ["Animal"])]
     public ActionResult<IEnumerable<GetVisitResponse>> GetAnimalVisits([FromRoute] int id)
     {
         var visits = _dbContext.Visits.Where(v => v.Id == id).ToList();

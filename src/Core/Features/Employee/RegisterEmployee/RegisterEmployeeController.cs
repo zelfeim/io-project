@@ -2,6 +2,7 @@ using Application.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Application.Features.Employee.RegisterEmployee;
 
@@ -20,6 +21,7 @@ public class RegisterEmployeeController : ControllerBase
 
     [HttpPost]
     [Authorize(Roles = "Admin")]
+    [SwaggerOperation(Tags = ["Employee"])]
     public async Task<ActionResult<int>> Create([FromBody] CreateEmployeeRequest request)
     {
         var employee = RegisterEmployeeMapper.MapCreateEmployeeRequestToEmployee(request);

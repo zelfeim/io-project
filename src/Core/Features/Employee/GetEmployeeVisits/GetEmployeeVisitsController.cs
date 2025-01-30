@@ -22,7 +22,7 @@ public class GetEmployeeVisitsController : ControllerBase
     }
 
     [HttpGet("{id:int}/visits")]
-    [Authorize(Roles = "Admin,Receptionist")]
+    [Authorize(Roles = "Receptionist")]
     [SwaggerOperation(Tags = ["Employee"])]
     public ActionResult<IEnumerable<GetVisitResponse>> GetEmployeeVisits([FromRoute] int id)
     {
@@ -34,6 +34,7 @@ public class GetEmployeeVisitsController : ControllerBase
     }
 
     [HttpGet("visits")]
+    [Authorize(Roles = "Vet,Receptionist")]
     [SwaggerOperation(Tags = ["Employee"])]
     public ActionResult<IEnumerable<GetVisitResponse>> GetCurrentEmployeeVisits()
     {

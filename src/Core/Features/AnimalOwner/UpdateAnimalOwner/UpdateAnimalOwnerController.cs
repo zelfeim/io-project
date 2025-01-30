@@ -2,6 +2,7 @@ using Application.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Application.Features.AnimalOwner.UpdateAnimalOwner;
 
@@ -18,6 +19,7 @@ public class UpdateAnimalOwnerController : ControllerBase
 
     [HttpPut("{id:int}/update")]
     [Authorize(Roles = "Receptionist")]
+    [SwaggerOperation(Tags = ["AnimalOwner"])]
     public async Task<ActionResult> Handle(int id, [FromBody] UpdateAnimalOwnerRequest request)
     {
         var animalOwner = await _dbContext.AnimalOwners.SingleOrDefaultAsync(o => o.Id == id);
