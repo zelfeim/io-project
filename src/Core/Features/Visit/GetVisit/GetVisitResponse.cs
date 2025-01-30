@@ -5,6 +5,7 @@ namespace Application.Features.Visit.GetVisit;
 
 public record GetVisitResponse
 {
+    public int Id { get; init; }
     public int AnimalId { get; init; }
     public int EmployeeId { get; init; }
     public DateTime Date { get; init; }

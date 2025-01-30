@@ -20,7 +20,7 @@ public class CreateResourceController : ControllerBase
     }
 
     [HttpPost]
-    [Authorize(Roles = "Admin,Vet")]
+    [Authorize(Roles = "Vet")]
     [SwaggerOperation(Tags = ["Resource"])]
     public async Task<ActionResult<int>> CreateResourceAsync([FromBody] CreateResourceRequest request)
     {

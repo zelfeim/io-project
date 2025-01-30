@@ -8,7 +8,6 @@ namespace Application.Features.Animal.GetAnimal;
 
 [ApiController]
 [Route("api/animal")]
-[Authorize(Roles = "Admin,Vet,Receptionist")]
 public class GetAnimalController : ControllerBase
 {
     private readonly ApplicationDbContext _dbContext;
@@ -21,6 +20,7 @@ public class GetAnimalController : ControllerBase
     }
 
     [HttpGet("{id:int}")]
+    [Authorize(Roles = "Vet,Receptionist")]
     public async Task<ActionResult<GetAnimalResponse>> GetSingle(int id)
     {
         var animal = await _dbContext.Animals.FindAsync(id);
@@ -31,6 +31,7 @@ public class GetAnimalController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize(Roles = "Vet,Receptionist")]
     public async Task<ActionResult<IEnumerable<GetAnimalResponse>>> GetAll()
     {
         var animals = await _dbContext.Animals.ToListAsync();

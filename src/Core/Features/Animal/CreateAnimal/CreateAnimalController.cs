@@ -7,7 +7,6 @@ namespace Application.Features.Animal.CreateAnimal;
 
 [ApiController]
 [Route("api/animal")]
-[Authorize(Roles = "Admin,Vet,Receptionist")]
 public class CreateAnimalController : ControllerBase
 {
     private readonly ApplicationDbContext _dbContext;
@@ -20,6 +19,7 @@ public class CreateAnimalController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "Receptionist")]
     public async Task<ActionResult<int>> Handle([FromBody] CreateAnimalRequest request)
     {
         var animal = new Domain.Aggregates.AnimalAggregate.Animal(request.AnimalOwnerId, request.Name, request.Species,
@@ -30,13 +30,4 @@ public class CreateAnimalController : ControllerBase
 
         return animal.Id;
     }
-}
-
-public record CreateAnimalRequest
-{
-    public string Name { get; set; }
-    public int Age { get; set; }
-    public string Race { get; set; }
-    public string Species { get; set; }
-    public int AnimalOwnerId { get; set; }
 }

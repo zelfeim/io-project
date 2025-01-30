@@ -8,7 +8,6 @@ namespace Application.Features.Employee.GetEmployee;
 
 [ApiController]
 [Route("api/employee")]
-[Authorize(Roles = "Admin")]
 public class GetEmployeeController : ControllerBase
 {
     private readonly ApplicationDbContext _dbContext;
@@ -21,6 +20,7 @@ public class GetEmployeeController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize(Roles = "Admin")]
     public async Task<ActionResult<List<GetEmployeeResponse>>> GetAll()
     {
         var employees = await _dbContext.Employees.ToListAsync();
@@ -29,6 +29,7 @@ public class GetEmployeeController : ControllerBase
     }
 
     [HttpGet("{id:int}")]
+    [Authorize(Roles = "Admin")]
     public ActionResult<GetEmployeeResponse> GetSingle(int id)
     {
         var employee = _dbContext.Employees.Find(id);

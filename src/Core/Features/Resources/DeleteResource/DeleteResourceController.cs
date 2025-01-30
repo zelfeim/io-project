@@ -20,7 +20,7 @@ public class DeleteResourceController : ControllerBase
     }
 
     [HttpDelete("{id:int}")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Vet")]
     [SwaggerOperation(Tags = ["Resource"])]
     public async Task<ActionResult> DeleteResource(int id)
     {

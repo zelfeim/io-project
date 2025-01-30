@@ -6,7 +6,6 @@ namespace Application.Features.AnimalOwner.CreateAnimalOwner;
 
 [ApiController]
 [Route("api/animal-owner")]
-[Authorize(Roles = "Receptionist")]
 public class CreateAnimalOwnerController : ControllerBase
 {
     private readonly ApplicationDbContext _dbContext;
@@ -17,6 +16,7 @@ public class CreateAnimalOwnerController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "Receptionist")]
     public async Task<ActionResult<int>> Handle([FromBody] CreateAnimalOwnerRequest request)
     {
         var animalOwner = new Domain.Aggregates.AnimalOwnerAggregate.AnimalOwner(request.Name, request.Surname,

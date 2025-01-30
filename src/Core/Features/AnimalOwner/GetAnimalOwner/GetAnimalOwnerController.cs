@@ -7,7 +7,6 @@ namespace Application.Features.AnimalOwner.GetAnimalOwner;
 
 [ApiController]
 [Route("api/animal-owner")]
-[Authorize(Roles = "Admin,Vet,Receptionist")]
 public class GetAnimalOwnerController : ControllerBase
 {
     private readonly ApplicationDbContext _dbContext;
@@ -18,6 +17,7 @@ public class GetAnimalOwnerController : ControllerBase
     }
 
     [HttpGet("{id:int}")]
+    [Authorize(Roles = "Vet,Receptionist")]
     public async Task<ActionResult<GetAnimalOwnerResponse>> GetSingle(int id)
     {
         var animalOwner = await _dbContext.AnimalOwners.SingleOrDefaultAsync(o => o.Id == id);
@@ -28,6 +28,7 @@ public class GetAnimalOwnerController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize(Roles = "Vet,Receptionist")]
     public async Task<ActionResult<IEnumerable<GetAnimalOwnerResponse>>> GetAll()
     {
         var animalOwners = await _dbContext.AnimalOwners.ToListAsync();

@@ -7,7 +7,6 @@ namespace Application.Features.Employee.DeleteEmployee;
 
 [ApiController]
 [Route("api/employee")]
-[Authorize(Roles = "Admin")]
 public class DeleteEmployeeController : ControllerBase
 {
     private readonly ApplicationDbContext _dbContext;
@@ -20,6 +19,7 @@ public class DeleteEmployeeController : ControllerBase
     }
 
     [HttpDelete("{id:int}")]
+    [Authorize(Roles = "Admin")] 
     public async Task<ActionResult> Handle(int id)
     {
         var employee = await _dbContext.Employees.FindAsync(id);

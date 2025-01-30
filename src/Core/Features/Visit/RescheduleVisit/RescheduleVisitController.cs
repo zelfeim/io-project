@@ -1,4 +1,5 @@
 using Application.Infrastructure.Persistence;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +15,7 @@ public class RescheduleVisitController : ControllerBase
     }
 
     [HttpPut("visit/{id:int}/reschedule")]
+    [Authorize(Roles = "Receptionist")]
     public async Task<ActionResult> Handle(int id, [FromBody] RescheduleVisitRequest request)
     {
         var visit = await _dbContext.Visits.SingleOrDefaultAsync(v => v.Id == id);

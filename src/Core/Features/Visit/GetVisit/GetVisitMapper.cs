@@ -6,6 +6,7 @@ public static class GetVisitMapper
     {
         return new GetVisitResponse
         {
+            Id = visit.Id,
             AnimalId = visit.AnimalId,
             EmployeeId = visit.EmployeeId,
             Date = visit.Date,

@@ -7,7 +7,6 @@ namespace Application.Features.Visit.EndVisit;
 
 [ApiController]
 [Route("api/visit")]
-[Authorize(Roles = "Vet")]
 public class EndVisitController : ControllerBase
 {
     private readonly ApplicationDbContext _dbContext;
@@ -18,6 +17,7 @@ public class EndVisitController : ControllerBase
     }
 
     [HttpPost("{id:int}/end")]
+    [Authorize(Roles = "Vet")]
     public async Task<ActionResult> Handle(int id, [FromBody] EndVisitRequest request)
     {
         var visit = await _dbContext.Visits.SingleOrDefaultAsync(v => v.Id == id);
