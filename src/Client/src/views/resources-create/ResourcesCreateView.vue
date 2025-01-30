@@ -3,7 +3,7 @@ import ControlErrorComponent from '@/components/control-error/ControlErrorCompon
 import useResourcesCreateValidation from '@/views/resources-create/composables/use-resources-create-validation.ts';
 import RoutePath from '@/enums/route-path.ts';
 import { useRouter } from 'vue-router';
-import useCreateResource from '@/queries/use-create-resource.ts';
+import useCreateResource from '@/views/resources-create/queries/use-create-resource.ts';
 import { ElNotification } from 'element-plus';
 import ResourceType from '@/enums/resource-type.ts';
 import { RESOURCE_TYPE_TRANSLATIONS } from '@/translations/resource.ts';

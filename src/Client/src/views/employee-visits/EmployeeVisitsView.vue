@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import useGetCurrentEmployeeVisits from '@/queries/use-get-current-employee-visits.ts';
+import useGetCurrentEmployeeVisits from '@/views/employee-visits/queries/use-get-current-employee-visits.ts';
 import useGetAnimals from '@/views/animals/queries/use-get-animals.ts';
 import type { ComputedRef, Ref } from 'vue';
 import { computed, ref } from 'vue';
 import useEndVisitDataValidation from '@/views/employee-visits/composables/use-end-visit-data-validation.ts';
 import ControlErrorComponent from '@/components/control-error/ControlErrorComponent.vue';
-import useEndVisit from '@/queries/use-end-visit.ts';
+import useEndVisit from '@/views/employee-visits/queries/use-end-visit.ts';
 import type { Visit } from '@/types/visit.ts';
 import { VISIT_STATUS_TRANSLATIONS, VISIT_TYPE_TRANSLATIONS } from '../../translations/visit.ts';
 import { Animal } from '../../types/animal.ts';

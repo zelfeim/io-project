@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import useGetAnimalVisits from '@/queries/use-get-animal-visits.ts';
+import useGetAnimalVisits from '@/views/animal/queries/use-get-animal-visits.ts';
 import { useRoute, useRouter } from 'vue-router';
-import useGetAnimal from '@/queries/use-get-animal.ts';
+import useGetAnimal from '@/views/animal/queries/use-get-animal.ts';
 import useGetAnimalOwners from '@/views/animal-owners/queries/use-get-animal-owners.ts';
 import type { AnimalOwner } from '@/types/animal-owner.ts';
 import RoutePath from '@/enums/route-path.ts';
