@@ -117,12 +117,16 @@ const handleEndVisit = async (): Promise<void> => {
                 </template>
             </el-table-column>
 
-            <el-table-column label="Akcje" width="120">
+            <el-table-column width="100">
                 <template #default="scope">
                     <el-button @click="push({ name: 'visit', params: { id: scope.row.id } })" link type="primary"
                         >Szczegóły</el-button
                     >
+                </template>
+            </el-table-column>
 
+            <el-table-column width="110">
+                <template #default="scope">
                     <el-button
                         v-if="scope.row.visitStatus === VisitStatus.PLANNED"
                         @click="visitToEnd = scope.row"

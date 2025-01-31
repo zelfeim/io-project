@@ -14,9 +14,7 @@ const { sessionStart } = storeToRefs(mainStore());
 
 const handleLogin = async (): Promise<void> => {
     try {
-        const response = await httpClient.post('/login', {
-            // email: 'test@email.com',
-            // password: 'password',
+        await httpClient.post('/login', {
             email: v$.value.login.$model,
             password: v$.value.password.$model,
         });
