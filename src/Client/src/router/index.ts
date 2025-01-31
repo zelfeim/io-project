@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, type Router } from 'vue-router';
+import { createRouter, createWebHistory, type RouteLocationNormalized, type Router } from 'vue-router';
 import HomeView from '@/views/home/HomeView.vue';
 import RoutePath from '@/enums/route-path.ts';
 import LoginView from '@/views/login/LoginView.vue';
@@ -16,6 +16,11 @@ import EmployeeCreateView from '@/views/employee-create/EmployeeCreateView.vue';
 import ResourcesCreateView from '@/views/resources-create/ResourcesCreateView.vue';
 import EmployeeVisitsView from '@/views/employee-visits/EmployeeVisitsView.vue';
 import VisitView from '@/views/visit/VisitView.vue';
+import httpClient from '@/http-client';
+import { storeToRefs } from 'pinia';
+import mainStore from '@/stores/main-store.ts';
+import Role from '@/enums/role.ts';
+import type { AxiosResponse } from 'axios';
 
 const router: Router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -169,6 +174,25 @@ const router: Router = createRouter({
             redirect: RoutePath.HOME,
         },
     ],
+});
+
+router.beforeEach(async (to: RouteLocationNormalized): Promise<boolean | RoutePath> => {
+    const { role } = storeToRefs(mainStore());
+    let isAuthenticated: boolean = false;
+
+    try {
+        const response: AxiosResponse<Role> = await httpClient.get('/roles');
+        role.value = response.data;
+        isAuthenticated = true;
+    } catch {
+        isAuthenticated = false;
+    }
+
+    if (to.meta.public) {
+        return !isAuthenticated || RoutePath.HOME;
+    }
+
+    return isAuthenticated || RoutePath.LOGIN;
 });
 
 export default router;
