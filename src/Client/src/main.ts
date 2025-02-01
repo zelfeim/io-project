@@ -7,7 +7,7 @@ import { createPinia } from 'pinia';
 import piniaPluginPersistedState from 'pinia-plugin-persistedstate';
 import { VueQueryPlugin } from '@tanstack/vue-query';
 
-const app: App<Element> = createApp(App);
+const app = createApp(App);
 
 const pinia: Plugin = createPinia().use(piniaPluginPersistedState);
 

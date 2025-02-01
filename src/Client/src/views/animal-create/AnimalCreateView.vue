@@ -18,7 +18,7 @@ const handleAdd = async () => {
         age: v$.value.age.$model,
         race: v$.value.race.$model,
         species: v$.value.species.$model,
-        animalOwnerId: v$.value.animalOwnerId.$model,
+        animalOwnerId: v$.value.animalOwnerId.$model as number,
     });
 
     await push({ path: RoutePath.ANIMALS });

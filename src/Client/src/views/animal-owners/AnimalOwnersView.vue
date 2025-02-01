@@ -44,7 +44,7 @@ const handleDelete = async (id: string) => {
 
             <template #footer>
                 <el-button @click="ownerToDelete = null" type="warning">Anuluj</el-button>
-                <el-button @click="handleDelete(ownerToDelete.id)" type="primary">Usuń</el-button>
+                <el-button @click="handleDelete(ownerToDelete!.id.toString())" type="primary">Usuń</el-button>
             </template>
         </el-dialog>
 

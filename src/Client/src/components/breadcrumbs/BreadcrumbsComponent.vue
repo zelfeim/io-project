@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RouteLocationNormalizedLoaded, useRoute } from 'vue-router';
+import { type RouteLocationNormalizedLoaded, useRoute } from 'vue-router';
 import type { ComputedRef } from 'vue';
 import { computed } from 'vue';
 import RoutePath from '@/enums/route-path.ts';
@@ -26,6 +26,7 @@ const ROUTE_NAME_BY_PATH: Record<RoutePath, string> = {
     [RoutePath.EMPLOYEE_VISITS]: 'Wizyty',
     [RoutePath.EMPLOYEE_CREATE]: 'Dodaj pracownika',
     [RoutePath.VISIT_CREATE]: 'Dodaj wizytę',
+    [RoutePath.VISIT]: '',
 };
 </script>
 

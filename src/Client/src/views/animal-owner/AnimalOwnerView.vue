@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { RouteLocationNormalizedLoaded, useRoute, useRouter } from 'vue-router';
+import { type RouteLocationNormalizedLoaded, useRoute, useRouter } from 'vue-router';
 import useGetAnimalOwner from '@/views/animal-owner/queries/use-get-animal-owner.ts';
 import useGetOwnerAnimals from '@/views/animal-owner/queries/use-get-owner-animals.ts';
 import useDeleteAnimal from '@/views/animals/queries/use-delete-animal.ts';
-import { computed, ComputedRef, ref, Ref } from 'vue';
-import { Animal } from '@/types/animal.ts';
+import { computed, type ComputedRef, ref, type Ref } from 'vue';
+import { type Animal } from '@/types/animal.ts';
 import { ElNotification } from 'element-plus';
 import useDeleteAnimalOwner from '@/views/animal-owners/queries/use-delete-animal-owner.ts';
 import RoutePath from '@/enums/route-path.ts';
@@ -32,7 +32,7 @@ const isRemoveAnimalDialogVisible: ComputedRef<boolean> = computed({
 const isRemoveOwnerDialogVisible: Ref<boolean> = ref(false);
 
 const handleDeleteAnimalOwner = async (): Promise<void> => {
-    await deleteAnimalOwner(owner.value.id);
+    await deleteAnimalOwner(owner.value?.id as number);
     await push({ path: RoutePath.ANIMAL_OWNERS });
 
     ElNotification({
@@ -70,7 +70,7 @@ const handleDeleteAnimal = async (id: string): Promise<void> => {
 
         <template #footer>
             <el-button @click="animalToRemove = null" type="warning">Anuluj</el-button>
-            <el-button @click="handleDeleteAnimal(animalToRemove.id)" type="primary">Usuń</el-button>
+            <el-button @click="handleDeleteAnimal(animalToRemove!.id.toString())" type="primary">Usuń</el-button>
         </template>
     </el-dialog>
 

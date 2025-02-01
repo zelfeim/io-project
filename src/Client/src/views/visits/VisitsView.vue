@@ -10,14 +10,15 @@ import { computed, ref } from 'vue';
 import type { Visit } from '@/types/visit.ts';
 import useGetAnimals from '@/views/animals/queries/use-get-animals.ts';
 import useGetEmployees from '@/queries/use-get-employees.ts';
-import { Animal } from '@/types/animal.ts';
-import { Employee } from '@/types/employee.ts';
+import { type Animal } from '@/types/animal.ts';
+import { type Employee } from '@/types/employee.ts';
 import useHasAnyRole from '@/composables/use-has-any-role.ts';
 import Role from '@/enums/role.ts';
 import VisitStatus from '@/enums/visit-status.ts';
 import useRescheduleVisitValidation from '@/views/visits/composables/use-reschedule-visit-validation.ts';
 import useRescheduleVisit from '@/views/visits/queries/use-reschedule-visit.ts';
 import ControlErrorComponent from '@/components/control-error/ControlErrorComponent.vue';
+import VisitType from '../../enums/visit-type.ts';
 
 const { mutateAsync: rescheduleVisit } = useRescheduleVisit();
 const { v$ } = useRescheduleVisitValidation();
@@ -96,7 +97,7 @@ const getEmployeeName = (id: number): string => {
         <template #default> Czy na pewno chcesz anulować wizytę </template>
         <template #footer>
             <el-button @click="visitToCancel = null" type="warning">Anuluj</el-button>
-            <el-button @click="handleCancelVisit(visitToCancel?.id)" type="primary">Zatwierdź</el-button>
+            <el-button @click="handleCancelVisit(visitToCancel!.id)" type="primary">Zatwierdź</el-button>
         </template>
     </el-dialog>
 
@@ -110,7 +111,7 @@ const getEmployeeName = (id: number): string => {
                     v-model="v$.date.$model"
                     @blur="v$.date.$touch()"
                     type="datetime"
-                    :disabled-date="(date) => date.getTime() < new Date().getTime()"
+                    :disabled-date="(date: Date) => date.getTime() < new Date().getTime()"
                 ></el-date-picker>
 
                 <control-error-component :v$="v$.date" />
@@ -131,7 +132,7 @@ const getEmployeeName = (id: number): string => {
         </template>
         <template #footer>
             <el-button @click="visitToReschedule = null" type="warning">Anuluj</el-button>
-            <el-button @click="handleRescheduleVisit(visitToReschedule?.id)" type="primary">Zatwierdź</el-button>
+            <el-button @click="handleRescheduleVisit(visitToReschedule!.id)" type="primary">Zatwierdź</el-button>
         </template>
     </el-dialog>
 
@@ -144,7 +145,7 @@ const getEmployeeName = (id: number): string => {
             </el-table-column>
             <el-table-column label="Pacjent">
                 <template #default="scope">
-                    {{ animals?.find((animal: Animal): boolean => animal.id === scope.row.animalId).name }}
+                    {{ animals?.find((animal: Animal): boolean => animal.id === scope.row.animalId)?.name }}
                 </template>
             </el-table-column>
             <el-table-column label="Lekarz">
@@ -152,12 +153,12 @@ const getEmployeeName = (id: number): string => {
             </el-table-column>
             <el-table-column prop="visitType" label="Typ Wizyty">
                 <template #default="scope">
-                    {{ VISIT_TYPE_TRANSLATIONS[scope.row.visitType] }}
+                    {{ VISIT_TYPE_TRANSLATIONS[scope.row.visitType as VisitType] }}
                 </template>
             </el-table-column>
             <el-table-column prop="visitStatus" label="Status">
                 <template #default="scope">
-                    {{ VISIT_STATUS_TRANSLATIONS[scope.row.visitStatus] }}
+                    {{ VISIT_STATUS_TRANSLATIONS[scope.row.visitStatus as VisitStatus] }}
                 </template>
             </el-table-column>
             <el-table-column prop="visitInformation" label="Informacje o Wizycie">

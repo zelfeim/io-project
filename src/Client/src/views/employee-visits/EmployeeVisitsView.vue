@@ -7,12 +7,13 @@ import useEndVisitDataValidation from '@/views/employee-visits/composables/use-e
 import ControlErrorComponent from '@/components/control-error/ControlErrorComponent.vue';
 import useEndVisit from '@/views/employee-visits/queries/use-end-visit.ts';
 import type { Visit } from '@/types/visit.ts';
-import { VISIT_STATUS_TRANSLATIONS, VISIT_TYPE_TRANSLATIONS } from '../../translations/visit.ts';
-import { Animal } from '../../types/animal.ts';
+import { VISIT_STATUS_TRANSLATIONS, VISIT_TYPE_TRANSLATIONS } from '@/translations/visit.ts';
+import { type Animal } from '@/types/animal.ts';
 import { ElNotification } from 'element-plus';
 import VisitStatus from '@/enums/visit-status.ts';
 import { useRouter } from 'vue-router';
 import RoutePath from '@/enums/route-path.ts';
+import VisitType from '../../enums/visit-type.ts';
 
 const { push } = useRouter();
 const { v$ } = useEndVisitDataValidation();
@@ -82,7 +83,7 @@ const handleEndVisit = async (): Promise<void> => {
             <p class="form-disclaimer">* Pole wymagane</p>
 
             <div class="buttons-wrapper">
-                <el-button @click="isEndVisitDialogOpened = null" link type="warning">Anuluj</el-button>
+                <el-button @click="isEndVisitDialogOpened = false" link type="warning">Anuluj</el-button>
                 <el-button @click="handleEndVisit()" type="primary">Zakończ</el-button>
             </div>
         </template>
@@ -98,17 +99,17 @@ const handleEndVisit = async (): Promise<void> => {
             </el-table-column>
             <el-table-column label="Pacjent">
                 <template #default="scope">
-                    {{ animals?.find((animal: Animal): boolean => animal.id === scope.row.animalId).name }}
+                    {{ animals?.find((animal: Animal): boolean => animal.id === scope.row.animalId)?.name }}
                 </template>
             </el-table-column>
             <el-table-column prop="visitType" label="Typ Wizyty">
                 <template #default="scope">
-                    {{ VISIT_TYPE_TRANSLATIONS[scope.row.visitType] }}
+                    {{ VISIT_TYPE_TRANSLATIONS[scope.row.visitType as VisitType] }}
                 </template>
             </el-table-column>
             <el-table-column prop="visitStatus" label="Status">
                 <template #default="scope">
-                    {{ VISIT_STATUS_TRANSLATIONS[scope.row.visitStatus] }}
+                    {{ VISIT_STATUS_TRANSLATIONS[scope.row.visitStatus as VisitStatus] }}
                 </template>
             </el-table-column>
             <el-table-column prop="visitInformation" label="Informacje o Wizycie">
