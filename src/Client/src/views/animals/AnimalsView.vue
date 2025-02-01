@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import useGetAnimals from '@/views/animals/queries/use-get-animals.ts';
 import type { Ref } from 'vue';
-import { computed, ComputedRef, ref } from 'vue';
+import { computed, type ComputedRef, ref } from 'vue';
 import type { Animal } from '@/types/animal.ts';
 import useDeleteAnimal from '@/views/animals/queries/use-delete-animal.ts';
 import { ElNotification } from 'element-plus';
 import { useRouter } from 'vue-router';
 import RoutePath from '@/enums/route-path.ts';
 import useGetAnimalOwners from '@/views/animal-owners/queries/use-get-animal-owners.ts';
-import { AnimalOwner } from '@/types/animal-owner.ts';
+import { type AnimalOwner } from '@/types/animal-owner.ts';
 import useHasAnyRole from '@/composables/use-has-any-role.ts';
 import Role from '@/enums/role.ts';
 
@@ -58,7 +58,7 @@ const getAnimalOwnerName = (id: number): string => {
 
             <template #footer>
                 <el-button @click="animalToRemove = null" type="warning">Anuluj</el-button>
-                <el-button @click="handleDelete(animalToRemove.id)" type="primary">Usuń</el-button>
+                <el-button @click="handleDelete(animalToRemove!.id.toString())" type="primary">Usuń</el-button>
             </template>
         </el-dialog>
 

@@ -29,12 +29,12 @@ const vets: ComputedRef<Employee[]> = computed((): Employee[] => {
 
 const handleCreateVisit = async (): Promise<void> => {
     await createVisit({
-        date: v$.value.date.$model.toISOString(),
-        animalId: v$.value.animalId.$model,
+        date: v$.value.date.$model!.toISOString(),
+        animalId: v$.value.animalId.$model as number,
         visitInformation: v$.value.visitInformation.$model,
         visitLength: v$.value.visitLength.$model,
-        type: v$.value.type.$model,
-        employeeId: v$.value.employeeId.$model,
+        type: v$.value.type.$model as VisitType,
+        employeeId: v$.value.employeeId.$model as number,
     });
 
     await push({ path: RoutePath.VISITS });
@@ -70,7 +70,7 @@ const handleCreateVisit = async (): Promise<void> => {
                 <el-date-picker
                     @blur="v$.date.$touch()"
                     v-model="v$.date.$model"
-                    :disabled-date="(date) => date.getTime() < Date.now()"
+                    :disabled-date="(date: Date) => date.getTime() < Date.now()"
                     size="large"
                     type="datetime"
                     placeholder="Wybierz datę i godzinę"

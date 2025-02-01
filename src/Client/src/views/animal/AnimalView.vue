@@ -6,6 +6,8 @@ import useGetAnimalOwners from '@/views/animal-owners/queries/use-get-animal-own
 import type { AnimalOwner } from '@/types/animal-owner.ts';
 import RoutePath from '@/enums/route-path.ts';
 import { VISIT_STATUS_TRANSLATIONS, VISIT_TYPE_TRANSLATIONS } from '@/translations/visit.ts';
+import VisitType from '../../enums/visit-type.ts';
+import VisitStatus from '../../enums/visit-status.ts';
 
 const route = useRoute();
 const { push } = useRouter();
@@ -47,12 +49,12 @@ const getAnimalOwnerName = (id: number): string => {
                 <el-table-column prop="visitLength" label="Długość wizyty (min)" />
                 <el-table-column prop="visitType" label="Typ wizyty">
                     <template #default="scope">
-                        {{ VISIT_TYPE_TRANSLATIONS[scope.row.visitType] }}
+                        {{ VISIT_TYPE_TRANSLATIONS[scope.row.visitType as VisitType] }}
                     </template>
                 </el-table-column>
                 <el-table-column prop="visitStatus" label="Status wizyty">
                     <template #default="scope">
-                        {{ VISIT_STATUS_TRANSLATIONS[scope.row.visitStatus] }}
+                        {{ VISIT_STATUS_TRANSLATIONS[scope.row.visitStatus as VisitStatus] }}
                     </template>
                 </el-table-column>
                 <el-table-column prop="visitInformation" label="Informacje" />
@@ -64,7 +66,7 @@ const getAnimalOwnerName = (id: number): string => {
         <div class="buttons-wrapper">
             <el-button type="primary" @click="push({ path: RoutePath.ANIMALS })" link> Wróć </el-button>
 
-            <el-button type="primary" @click="push({ name: 'animalOwner', params: { id: animal.animalOwnerId } })">
+            <el-button type="primary" @click="push({ name: 'animalOwner', params: { id: animal!.animalOwnerId } })">
                 Zobacz właściciela
             </el-button>
         </div>
