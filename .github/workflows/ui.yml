@@ -8,6 +8,8 @@ on:
     branches: [ 'main' ]
     paths:
       - 'src/Client/**'
+      - '.github/workflows/ui.yml'
+  workflow_dispatch: 
 
 jobs:
   build:
