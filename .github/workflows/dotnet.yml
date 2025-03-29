@@ -9,13 +9,12 @@ on:
     paths:
       - 'src/Api/**'
       - 'src/Core/**'
-      - 'test/**'
   pull_request:
     branches: [ "main" ]
     paths: 
       - 'src/Api/**'
       - 'src/Core/**'
-      - 'test/**'
+      - 'tests/**'
   workflow_dispatch:
 
 jobs:
