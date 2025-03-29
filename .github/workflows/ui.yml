@@ -1,0 +1,29 @@
+name: ui
+on:
+  push:
+    branches: [ 'main' ]
+    paths:
+      - 'src/Client/**'
+  pull_request:
+    branches: [ 'main' ]
+    paths:
+      - 'src/Client/**'
+      - '.github/workflows/ui.yml'
+  workflow_dispatch: 
+
+jobs:
+  build:
+    
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install node_modules
+        working-directory: ./src/Client/
+        run: npm ci
+      - name: Build ui
+        working-directory: ./src/Client/
+        run: npm run build-only
+      - name: Check formatting
+        working-directory: ./src/Client/
+        run: npx prettier . --check
