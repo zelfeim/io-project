@@ -16,6 +16,7 @@ on:
       - 'src/Api/**'
       - 'src/Core/**'
       - 'test/**'
+  workflow_dispatch:
 
 jobs:
   build:
