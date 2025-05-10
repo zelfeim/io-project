@@ -15,7 +15,7 @@ const { data, isLoading } = useGetRoles();
 
 watch(isLoading, (value: boolean): void => {
     if (!value) {
-        role.value = data.value;
+        role.value = data.value || null;
     }
 });
 </script>

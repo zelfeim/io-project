@@ -56,7 +56,7 @@ const handleDeleteEmployee = async (): Promise<void> => {
             <el-table-column prop="emailAddress.email" label="E-mail" />
             <el-table-column prop="role" label="Rola">
                 <template #default="scope">
-                    {{ ROLE_TRANSLATIONS[scope.row.role] }}
+                    {{ ROLE_TRANSLATIONS[scope.row.role as Role] }}
                 </template>
             </el-table-column>
             <el-table-column prop="address" label="Adres" />

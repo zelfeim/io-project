@@ -16,7 +16,7 @@ const { data: visit } = useGetVisit(+route.params.id);
         <el-descriptions v-if="visit" title="Szczegóły wizyty" border>
             <el-descriptions-item label="ID Wizyty">{{ visit.id }}</el-descriptions-item>
             <el-descriptions-item label="ID Zwierzęcia">{{
-                animals?.find((animal) => animal.id === visit.animalId).name
+                animals?.find((animal) => animal.id === visit!.animalId)?.name
             }}</el-descriptions-item>
 
             <el-descriptions-item label="Data wizyty">
